@@ -10,6 +10,7 @@ const DIGIT_H := 36.0
 var _cache: Dictionary = {}
 var _fallback: Label
 var glyph_height: float = DIGIT_H
+var _last_text: String = ""
 
 
 func _ready() -> void:
@@ -19,6 +20,8 @@ func _ready() -> void:
 
 
 func set_display(text: String) -> void:
+	var changed := text != _last_text and _last_text != ""
+	_last_text = text
 	for c in get_children():
 		if c != _fallback:
 			c.queue_free()
@@ -44,6 +47,14 @@ func set_display(text: String) -> void:
 		_ensure_fallback()
 		_fallback.text = text
 		_fallback.visible = true
+	if changed:
+		pulse()
+
+
+func pulse() -> void:
+	scale = Vector2(1.12, 1.12)
+	var tw := create_tween()
+	tw.tween_property(self, "scale", Vector2.ONE, 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
 func _clear_glyphs() -> void:

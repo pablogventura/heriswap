@@ -122,6 +122,21 @@ static func style_buttons_in(node: Node) -> void:
 	for c in node.get_children():
 		if c is BaseButton:
 			style_button(c)
+			wire_button_punch(c)
 		elif c is Label:
 			style_label(c, 24)
 		style_buttons_in(c)
+
+
+static func wire_button_punch(btn: BaseButton) -> void:
+	if btn.has_meta("punch_wired"):
+		return
+	btn.set_meta("punch_wired", true)
+	btn.button_down.connect(func():
+		var tw := btn.create_tween()
+		tw.tween_property(btn, "scale", Vector2(0.94, 0.94), 0.06)
+	)
+	btn.button_up.connect(func():
+		var tw := btn.create_tween()
+		tw.tween_property(btn, "scale", Vector2.ONE, 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	)
