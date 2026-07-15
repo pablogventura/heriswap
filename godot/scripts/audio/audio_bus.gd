@@ -58,6 +58,7 @@ func play_sfx(path: String) -> void:
 	var stream := load(path)
 	if stream:
 		_sfx.stream = stream
+		_sfx.pitch_scale = 1.0
 		_sfx.play()
 
 
@@ -73,7 +74,52 @@ func play_match() -> void:
 	play_sfx("res://assets/audio/son_descend.ogg")
 
 
+func play_match_combo(chain: int) -> void:
+	if not SaveService.is_sound_on():
+		return
+	var stream := load("res://assets/audio/son_descend.ogg")
+	if stream == null:
+		return
+	_sfx.stream = stream
+	_sfx.pitch_scale = 1.0 + 0.08 * float(mini(chain, 6))
+	_sfx.play()
+
+
+func play_invalid_swap() -> void:
+	if not SaveService.is_sound_on():
+		return
+	var stream := load("res://assets/audio/son_monte.ogg")
+	if stream == null:
+		return
+	_sfx.stream = stream
+	_sfx.pitch_scale = 0.72
+	_sfx.play()
+
+
+func play_land() -> void:
+	if not SaveService.is_sound_on():
+		return
+	var stream := load("res://assets/audio/son_descend.ogg")
+	if stream == null:
+		return
+	_sfx.stream = stream
+	_sfx.pitch_scale = 1.25
+	_sfx.play()
+
+
+func play_spawn_pop() -> void:
+	if not SaveService.is_sound_on():
+		return
+	var stream := load("res://assets/audio/son_menu.ogg")
+	if stream == null:
+		return
+	_sfx.stream = stream
+	_sfx.pitch_scale = 1.35
+	_sfx.play()
+
+
 func play_click() -> void:
+	_sfx.pitch_scale = 1.0
 	play_sfx("res://assets/audio/son_menu.ogg")
 
 
