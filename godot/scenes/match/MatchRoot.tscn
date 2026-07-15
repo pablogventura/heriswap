@@ -43,21 +43,32 @@ mouse_filter = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 16.0
-offset_bottom = 64.0
+offset_top = 12.0
+offset_bottom = 52.0
 mouse_filter = 2
-theme_override_font_sizes/font_size = 28
-text = "0"
+theme_override_font_sizes/font_size = 22
+text = ""
 horizontal_alignment = 1
+
+[node name="ScoreDigits" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 40.0
+offset_top = 48.0
+offset_right = -40.0
+offset_bottom = 90.0
+alignment = 1
+mouse_filter = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="HUD"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 40.0
-offset_top = 70.0
+offset_top = 96.0
 offset_right = -40.0
-offset_bottom = 90.0
+offset_bottom = 116.0
 mouse_filter = 2
 show_percentage = false
 
@@ -83,36 +94,39 @@ text = "||"
 
 [node name="PausePanel" type="Panel" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -160.0
-offset_right = 180.0
-offset_bottom = 160.0
+layout_mode = 0
+offset_left = 140.0
+offset_top = 400.0
+offset_right = 660.0
+offset_bottom = 900.0
 
 [node name="VBox" type="VBoxContainer" parent="PausePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
-theme_override_constants/separation = 12
+offset_left = 28.0
+offset_top = 36.0
+offset_right = -28.0
+offset_bottom = -36.0
+theme_override_constants/separation = 18
 
 [node name="Resume" type="Button" parent="PausePanel/VBox"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 64)
 text = "Continue"
+
+[node name="Restart" type="Button" parent="PausePanel/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 64)
+text = "Restart"
 
 [node name="Help" type="Button" parent="PausePanel/VBox"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 64)
 text = "Help"
 
 [node name="Quit" type="Button" parent="PausePanel/VBox"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 64)
 text = "Quit"
