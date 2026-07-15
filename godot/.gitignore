@@ -1,0 +1,8 @@
+.godot/
+export/*.apk
+export/*.aab
+export/*.exe
+export/*.x86_64
+android/build/
+local.properties
+*.keystore

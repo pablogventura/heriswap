@@ -1,0 +1,47 @@
+; Engine configuration file.
+; Godot 4.4 Heriswap rewrite
+
+config_version=5
+
+[application]
+
+config/name="Heriswap"
+config/description="Match-3 leaf game - Godot rewrite"
+config/version="2.0.0"
+run/main_scene="res://scenes/menus/Logo.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://assets/textures/feuilles/feuille1.png"
+
+[autoload]
+
+GameFlow="*res://scripts/flow/game_flow.gd"
+SaveService="*res://scripts/save/save_service.gd"
+PlatformServices="*res://scripts/platform/platform_services.gd"
+AudioBus="*res://scripts/audio/audio_bus.gd"
+LocaleService="*res://scripts/flow/locale_service.gd"
+Achievements="*res://scripts/achievements/achievements.gd"
+RunSnapshot="*res://scripts/save/run_snapshot.gd"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=1280
+window/size/window_width_override=400
+window/size/window_height_override=640
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+window/handheld/orientation=1
+
+[input]
+
+ui_cancel={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
