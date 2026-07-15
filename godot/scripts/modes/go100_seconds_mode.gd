@@ -27,7 +27,7 @@ func enter(difficulty: int, start_level: int = 1) -> void:
 func bind_branch(view: BranchLeavesView) -> void:
 	branch_view = view
 	if branch_view:
-		branch_view.generate(8, 6)
+		branch_view.generate(10, 8)
 		branch_view.set_all_types(bonus_type)
 
 
@@ -41,7 +41,7 @@ func update(dt: float, _grid: GridModel) -> void:
 		squall_duration += dt
 		if branch_view:
 			branch_view.grow_all(squall_duration)
-		if squall_duration >= 1.2:
+		if squall_duration >= 1.6:
 			squall_active = false
 			squall_duration = 0.0
 			squall_ended.emit()
@@ -50,7 +50,7 @@ func update(dt: float, _grid: GridModel) -> void:
 		if _grid:
 			types = _grid.type_count
 		bonus_type = rng.randi_range(0, maxi(0, types - 1))
-		branch_view.generate(8, 6)
+		branch_view.generate(10, 8)
 		branch_view.set_all_types(bonus_type)
 		branch_view.grow_all(0.01)
 		squall_active = true
