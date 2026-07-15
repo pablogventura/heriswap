@@ -25,34 +25,33 @@ godot --headless --path . -s res://test/test_grid.gd --quit-after 15
 
 Expect `TEST_GRID_OK`.
 
+## Features
+
+- 3 modes × 3 difficulties with branch leaves, hedgehog progress/hint, decor + clouds
+- Match-3 loop with difficulty timings, level-up FX (snow/desaturate), Elite popup, Go100 squall
+- Multi-track jukebox + stress ramp
+- Scores/options JSON, mid-game resume, 20 local achievements
+- i18n CSV (15 locales) + locale picker
+- `PlatformServices`: F-Droid-safe (no Play rate/IAP); Play hooks via optional Android singletons
+
 ## Export
 
 Presets in `godot/export_presets.cfg`:
 
-| Preset | Package |
-|--------|---------|
-| Linux / Windows | desktop binaries |
+| Preset | Notes |
+|--------|--------|
+| Linux / Windows | desktop |
 | Android Play | `net.damsy.soupeaucaillou.heriswap2` |
-| Android F-Droid | same package + `fdroid` feature (no Google services) |
+| Android F-Droid | same package + `fdroid` feature (hides Play Store rate / billing) |
 
-This is a **new** Android package (clean rewrite), not an update of `net.damsy.soupeaucaillou.heriswap`.
+New Android package (clean rewrite), not an update of `net.damsy.soupeaucaillou.heriswap`.
 
-## Features
-
-- 3 modes × 3 difficulties (Score race, Time attack, 100 seconds)
-- Match-3 grid with swap, delete, fall, spawn, no-move reset
-- Menus, help, pause, high scores (JSON), mid-game resume
-- Local achievements + `PlatformServices` stubs (Play Games / IAP offline-first)
-- i18n CSV (`en`, `es`, `fr`, `de`)
+Enable Play adapters with `HERISWAP_ENABLE_PLAY=1` or by installing Godot Play/Billing plugins (detected via `Engine.has_singleton`).
 
 ## Legacy C++ build
 
-See historical instructions below only if you need the sac engine build. It is **not** required for the Godot game.
-
 <details>
 <summary>Original C++ / sac build (reference)</summary>
-
-Prerequisites: `git`, `cmake`, `g++`; Android SDK/NDK for APK.
 
 ```bash
 git submodule update --init --recursive
@@ -63,8 +62,4 @@ git submodule update --init --recursive
 
 ## License
 
-GPL-3 for code (see [LICENSE](LICENSE)). Artwork: CC-by (see LICENSE). Engine exceptions for sac remain under `sac/LICENSE` when the submodule is present.
-
-## Authors
-
-Soupe au Caillou - original game. Godot port lives in `godot/`.
+GPL-3 for code (see [LICENSE](LICENSE)). Artwork: CC-by (see LICENSE).
