@@ -139,9 +139,11 @@ func s_lucky_luke_note_combo() -> void:
 	lucky_window.append(now)
 	while lucky_window.size() > 0 and now - float(lucky_window[0]) > 30.0:
 		lucky_window.pop_front()
-	# more than 1 combi per 5 sec during 30 sec => > 6 combos in window
-	if lucky_window.size() > 6:
-		_unlock("ELuckyLuke")
+	# more than 1 combi / 5 sec for 30 sec => >= 7 combos AND span covers ~30s
+	if lucky_window.size() >= 7:
+		var span := float(lucky_window[-1]) - float(lucky_window[0])
+		if span >= 25.0:
+			_unlock("ELuckyLuke")
 
 
 func s_test_everything(scores: Array) -> void:
