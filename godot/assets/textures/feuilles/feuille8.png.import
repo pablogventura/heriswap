@@ -14,6 +14,7 @@ source_file="res://assets/textures/feuilles/feuille8.png"
 dest_files=["res://.godot/imported/feuille8.png-ebe8bf8db7614483342f57608dd72c03.ctex"]
 
 [params]
+process/filter=0
 
 compress/mode=0
 compress/high_quality=false
