@@ -25,10 +25,11 @@ cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15
 ## Features
 
 - Match-3 with difficulty timings, ADSR-like morph tweens, branch leaves, hedgehog hint, decor
-- Level-up FX (snow flakes + desaturate), denser Go100 physical squall
-- Multi-track jukebox + stress ramp
+- **Match juice** (`JuiceFx`): colored bursts, combo banners, float `+score`, camera punch, screen flash shader, leaf glow, drag trail
+- Level-up FX (snow + desaturate + confetti), denser Go100 squall with punch
+- Multi-track jukebox + stress ramp + pitch-ramped combo SFX
 - Menus on fixed 800×1280 Control layout with original art (`fond_bouton`, layered plans, SAC)
-- FreeMono theme + selective alphabet bitmap digits on HUD / scores
+- FreeMono theme + selective alphabet bitmap digits on HUD / scores (pulse on change)
 - Scores JSON, mid-game resume, 20 local achievements (SuccessManager thresholds)
 - Help pages with `bg_help_*` backgrounds
 - 15 locales + locale picker
@@ -40,9 +41,10 @@ cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15
 - [ ] ModeMenu modes/diffs/scores + alphabet best score digits
 - [ ] Countdown curtain + numbers
 - [ ] Match: swap lerp, delete fade, fall, spawn grow
-- [ ] Level-up text/snow; Go100 squall burst
+- [ ] Juice: match bursts, combo text, trail glow, shake/flash
+- [ ] Level-up text/snow/confetti; Go100 squall burst
 - [ ] Help backgrounds cycle with pages
-- [ ] Pause panel buttons readable
+- [ ] Pause panel buttons readable / micro punch
 
 ## Package
 

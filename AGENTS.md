@@ -20,10 +20,14 @@ Gameplay clicks go to `PlayfieldInput` (`mouse_filter=STOP`). Backdrop `ColorRec
 
 Morph phases animate sprites first (`_animating` / `_swap_locked`), then commit `GridModel` on tween finish (swap → delete → fall waves → spawn grow).
 
+## Match juice
+
+`JuiceFx` owns candy-like feedback: `CPUParticles2D` bursts, float text, combo banners, grid shake, `leaf_glow` / `screen_flash` shaders, drag trail. Wired from `match_root.gd` on swap/delete/fall/spawn/level-up/squall. Do not leave glow materials on sprites during level-up desaturate (`juice.level_locked`).
+
 ## UI
 
-- `UiTheme` / `UiLayout`: FreeMono LabelSettings, `fond_bouton` hover/press, fixed Control coords
-- `AlphabetDigits`: bitmap glyphs from `assets/textures/alphabet/` for scores; FreeMono fallback
+- `UiTheme` / `UiLayout`: FreeMono LabelSettings, `fond_bouton` hover/press, fixed Control coords, button scale punch
+- `AlphabetDigits`: bitmap glyphs from `assets/textures/alphabet/` for scores; FreeMono fallback; pulse on score change
 
 ## Do not
 
