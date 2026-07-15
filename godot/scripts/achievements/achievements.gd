@@ -17,7 +17,8 @@ var rainbow_done: bool = false
 var double_rainbow_done: bool = false
 var l666_lose: int = 0
 var l_they_good: int = 0
-var lucky_window: Array = [] ## timestamps of combos
+var time_total_played: float = 0.0 ## Lucky Luke accumulator
+var time_in_swap_prep: float = 0.0
 var what_to_do_done: bool = false
 
 
@@ -47,7 +48,8 @@ func _reset_session() -> void:
 	game_duration = 0.0
 	rainbow_done = false
 	double_rainbow_done = false
-	lucky_window.clear()
+	time_total_played = 0.0
+	time_in_swap_prep = 0.0
 	what_to_do_done = false
 
 
@@ -132,25 +134,22 @@ func s_hard_score_total(total_points: int) -> void:
 		_unlock("EHardScore")
 
 
-func s_lucky_luke_note_combo() -> void:
+## Port of SuccessManager::sLuckyLuke - accumulate quick input loops until >= 15s.
+func s_lucky_luke(user_input_loop_sec: float) -> void:
 	if not hard_mode:
 		return
-	var now := game_duration
-	lucky_window.append(now)
-	while lucky_window.size() > 0 and now - float(lucky_window[0]) > 30.0:
-		lucky_window.pop_front()
-	# more than 1 combi / 5 sec for 30 sec => >= 7 combos AND span covers ~30s
-	if lucky_window.size() >= 7:
-		var span := float(lucky_window[-1]) - float(lucky_window[0])
-		if span >= 25.0:
-			_unlock("ELuckyLuke")
+	if user_input_loop_sec < 2.0:
+		time_total_played += user_input_loop_sec
+	else:
+		time_total_played = 0.0
+	if time_total_played >= 15.0:
+		_unlock("ELuckyLuke")
 
 
 func s_test_everything(scores: Array) -> void:
 	var seen := {}
 	for s in scores:
 		seen["%d_%d" % [int(s.mode), int(s.difficulty)]] = true
-	# 3 modes × 3 diffs (easy=0, hard=1, medium=2)
 	for mode in 3:
 		for diff in [0, 1, 2]:
 			if not seen.has("%d_%d" % [mode, diff]):
@@ -158,23 +157,31 @@ func s_test_everything(scores: Array) -> void:
 	_unlock("ETestEverything")
 
 
+## BTAC = beat Normal (mode 0) top5 when board is full; BTAM = Tiles (mode 1).
 func s_beat_top(mode: int, difficulty: int, points: int, time_sec: float) -> void:
-	if not SaveService.is_high_score(mode, difficulty, points, time_sec):
-		return
 	var top := SaveService.get_top5(mode, difficulty)
-	if top.is_empty():
+	if top.size() < 5:
 		return
-	# beating implies entered top; for first place vs previous
-	if difficulty == Difficulty.EASY:
-		_unlock("EBTAC")
-	elif difficulty == Difficulty.MEDIUM:
-		_unlock("EBTAM")
+	if mode == GameModeBase.MODE_NORMAL:
+		var worst := int(top[top.size() - 1].points)
+		if points > worst:
+			_unlock("EBTAC")
+	elif mode == GameModeBase.MODE_TILES_ATTACK:
+		# Top5 ordered best-first for time; entering board beats the worst (highest) time.
+		var worst_time := float(top[top.size() - 1].time)
+		if time_sec < worst_time:
+			_unlock("EBTAM")
 
 
-func s_666_loser() -> void:
-	l666_lose += 1
+func s_666_loser(level: int) -> void:
+	if not hard_mode:
+		return
+	if level == 6:
+		l666_lose += 1
+	else:
+		l666_lose = 0
 	_persist()
-	if hard_mode and l666_lose >= 3:
+	if l666_lose >= 3:
 		_unlock("E666Loser")
 
 
@@ -188,10 +195,17 @@ func s_they_good(is_high: bool) -> void:
 		_unlock("ETheyGood")
 
 
-func s_what_to_do() -> void:
-	if hard_mode and not what_to_do_done:
+func s_what_to_do(swap_in_preparation: bool, dt: float) -> void:
+	if what_to_do_done:
+		return
+	if swap_in_preparation:
+		time_in_swap_prep += dt
+	else:
+		time_in_swap_prep = 0.0
+	if time_in_swap_prep > 5.0:
 		what_to_do_done = true
-		_unlock("EWhatToDo")
+		if hard_mode:
+			_unlock("EWhatToDo")
 
 
 func s_bim_bam_boum(chain: int) -> void:
@@ -226,6 +240,8 @@ func to_dict() -> Dictionary:
 		"rainbow_done": rainbow_done,
 		"double_rainbow_done": double_rainbow_done,
 		"what_to_do_done": what_to_do_done,
+		"time_total_played": time_total_played,
+		"time_in_swap_prep": time_in_swap_prep,
 	}
 
 
@@ -238,3 +254,5 @@ func from_dict(data: Dictionary) -> void:
 	rainbow_done = bool(data.get("rainbow_done", false))
 	double_rainbow_done = bool(data.get("double_rainbow_done", false))
 	what_to_do_done = bool(data.get("what_to_do_done", false))
+	time_total_played = float(data.get("time_total_played", 0.0))
+	time_in_swap_prep = float(data.get("time_in_swap_prep", 0.0))

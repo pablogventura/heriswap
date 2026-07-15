@@ -1,45 +1,29 @@
 extends Control
 
-var _pages: Array = [] ## {text, icons}
+var _pages: Array = [] ## {text, icons, bg}
 var _index: int = 0
-var _next_btn: Button
-var _text: RichTextLabel
-var _icons: HBoxContainer
 
 
 func _ready() -> void:
 	UiTheme.apply_backdrop(self)
+	UiTheme.style_button($Next)
+	UiTheme.style_button($Back)
 	_pages = [
-		{"text": _plain(tr("help_general_1")), "icons": ["feuille1", "feuille2", "feuille3"]},
-		{"text": _plain(tr("help_general_2")), "icons": ["herisson_2_5"]},
-		{"text": _plain(tr("help_mode1_1")), "icons": ["feuille5"]},
-		{"text": _plain(tr("help_mode1_2")), "icons": ["feuille5"]},
-		{"text": _plain(tr("help_mode2_1")), "icons": ["feuille1", "feuille2"]},
-		{"text": _plain(tr("help_mode2_2")), "icons": ["feuille5"]},
-		{"text": _plain(tr("help_mode3_1")), "icons": ["feuille1"]},
+		{"text": _plain(tr("help_general_1")), "icons": ["feuille1", "feuille2", "feuille3"], "bg": "bg_help_howto"},
+		{"text": _plain(tr("help_general_2")), "icons": ["herisson_2_5"], "bg": "bg_help_howto"},
+		{"text": _plain(tr("help_mode1_1")), "icons": ["feuille5"], "bg": "bg_help_obj_score"},
+		{"text": _plain(tr("help_mode1_2")), "icons": ["feuille5"], "bg": "bg_help_obj_score"},
+		{"text": _plain(tr("help_mode2_1")), "icons": ["feuille1", "feuille2"], "bg": "bg_help_obj_time"},
+		{"text": _plain(tr("help_mode2_2")), "icons": ["feuille5"], "bg": "bg_help_obj_time"},
+		{"text": _plain(tr("help_mode3_1")), "icons": ["feuille1"], "bg": "bg_help_howto"},
 	]
-	_text = $VBox/Text
-	_text.bbcode_enabled = false
-	_icons = $VBox.get_node_or_null("Icons") as HBoxContainer
-	if _icons == null:
-		_icons = HBoxContainer.new()
-		_icons.name = "Icons"
-		_icons.alignment = BoxContainer.ALIGNMENT_CENTER
-		$VBox.add_child(_icons)
-		$VBox.move_child(_icons, 0)
-	_next_btn = $VBox.get_node_or_null("Next") as Button
-	if _next_btn == null:
-		_next_btn = Button.new()
-		_next_btn.name = "Next"
-		$VBox.add_child(_next_btn)
-		$VBox.move_child(_next_btn, 2)
-	UiTheme.style_button(_next_btn)
-	UiTheme.style_button($VBox/Back)
-	if not _next_btn.pressed.is_connected(_next):
-		_next_btn.pressed.connect(_next)
-	$VBox/Back.text = tr("quit")
-	if not $VBox/Back.pressed.is_connected(_back):
-		$VBox/Back.pressed.connect(_back)
+	$Text.add_theme_font_override("normal_font", UiTheme.font())
+	$Text.add_theme_font_size_override("normal_font_size", 26)
+	$Back.text = tr("quit")
+	if not $Next.pressed.is_connected(_next):
+		$Next.pressed.connect(_next)
+	if not $Back.pressed.is_connected(_back):
+		$Back.pressed.connect(_back)
 	_show_page()
 
 
@@ -50,11 +34,13 @@ func _plain(s: String) -> String:
 
 
 func _show_page() -> void:
-	if _text == null or _next_btn == null:
-		return
 	var page: Dictionary = _pages[_index]
-	_text.text = str(page.text)
-	for c in _icons.get_children():
+	$Text.text = str(page.text)
+	var bg_path := "res://assets/textures/help/%s.png" % str(page.get("bg", "bg_help_howto"))
+	if ResourceLoader.exists(bg_path):
+		$HelpBg.texture = load(bg_path)
+		$HelpBg.modulate = Color(1, 1, 1, 0.55)
+	for c in $Icons.get_children():
 		c.queue_free()
 	for name in page.icons:
 		var path := "res://assets/textures/feuilles/%s.png" % name
@@ -62,11 +48,11 @@ func _show_page() -> void:
 			continue
 		var tr := TextureRect.new()
 		tr.texture = load(path)
-		tr.custom_minimum_size = Vector2(64, 64)
+		tr.custom_minimum_size = Vector2(72, 72)
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		_icons.add_child(tr)
-	_next_btn.text = tr("help_click_play") if _index >= _pages.size() - 1 else tr("help_click_continue")
+		$Icons.add_child(tr)
+	$Next.text = tr("help_click_play") if _index >= _pages.size() - 1 else tr("help_click_continue")
 
 
 func _next() -> void:
