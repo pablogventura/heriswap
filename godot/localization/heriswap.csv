@@ -1,0 +1,48 @@
+keys,en,es,fr,de
+continue_,Continue,Continuar,Continuer,Weiter
+help,Help,Ayuda,Aide,Hilfe
+give_up,Quit,Salir,Quitter,Beenden
+mode_1,Score race,Carrera de puntos,Course au score,Punkterennen
+mode_2,Time attack,Ataque temporal,Attaque temporelle,Zeitangriff
+mode_3,100 seconds,100 segundos,100 secondes,100 Sekunden
+score,Highscores:,Mejores marcas:,Meilleurs scores:,Highscores:
+play,Start,Empezar,Démarrer,Start
+restart,Restart,Reiniciar,Recommencer,Neustart
+diff_1,Easy,Fácil,Facile,Leicht
+diff_2,Medium,Medio,Moyen,Mittel
+diff_3,Hard,Difícil,Difficile,Schwer
+lvl,lvl,niv,niv,Lvl
+lvlcap,Lvl,Niv,Niv,Lvl
+enter_name,Enter your name,Escribe tu nombre,Entrez votre nom,Namen eingeben
+save_name,Save,Guardar,Enregistrer,Speichern
+congrats,New high score!,¡Nuevo récord!,Nouveau record !,Neuer Highscore!
+reuse_name,Or pick one:,O elige uno:,Ou choisissez :,Oder wählen:
+success,Success,Logros,Succès,Erfolge
+how_to_play,How to play?,¿Cómo jugar?,Comment jouer ?,Wie spielt man?
+bonus_x2,Bonus x2,Bonus x2,Bonus x2,Bonus x2
+objective,Goal,Objetivo,Objectif,Ziel
+level,Level,Nivel,Niveau,Level
+leave_left,leaves left,hojas restantes,feuilles restantes,Blätter übrig
+quit,Exit,Salir,Quitter,Beenden
+please_rate_it,"If you enjoy using Heriswap, please take a moment to rate it. Thanks for your support!","Si te gusta Heriswap, valóralo un momento. ¡Gracias!","Si vous aimez Heriswap, notez-le. Merci !","Wenn dir Heriswap gefällt, bewerte es bitte. Danke!"
+rate_now,Rate now,Valorar ahora,Noter maintenant,Jetzt bewerten
+rate_later,Later,Más tarde,Plus tard,Später
+rate_never,"No, thanks","No, gracias","Non, merci","Nein, danke"
+change_difficulty,"You seem really good. Would you like to start a new game with increased difficulty?","Pareces muy bueno. ¿Quieres subir la dificultad?","Vous semblez fort. Augmenter la difficulté ?","Du scheinst gut zu sein. Schwierigkeit erhöhen?"
+change_difficulty_yes,Increase difficulty,Subir dificultad,Augmenter,Erhöhen
+change_difficulty_no,"No, keep it easy","No, dejar fácil","Non, rester facile","Nein, leicht lassen"
+average_score,Recent scores avg:,Media reciente:,Moyenne récente:,Durchschnitt:
+help_click_continue,-touch to continue-,-toca para seguir-,-touchez pour continuer-,-tippen zum Fortfahren-
+help_click_play,-touch to play-,-toca para jugar-,-touchez pour jouer-,-tippen zum Spielen-
+help_general_1,"Aligning at least 3 identical leaves. Swap 2 neighbouring leaves to create a combination and earn points.","Alineá al menos 3 hojas iguales. Intercambiá 2 vecinas para combinar y sumar puntos.","Alignez au moins 3 feuilles identiques. Échangez 2 feuilles voisines.","Mindestens 3 gleiche Blätter. Tausche 2 Nachbarn."
+help_general_2,"The hedgehog shows how much time is left. Tap him to get a hint!","El erizo muestra el tiempo. ¡Tocarlo da una pista!","Le hérisson montre le temps. Touchez-le pour un indice !","Der Igel zeigt die Zeit. Tippe für einen Tipp!"
+help_mode1_1,"The goal is to score the most points. Game is time limited.","El objetivo es sumar más puntos. Hay límite de tiempo.","Marquez le plus de points. Temps limité.","Ziel: möglichst viele Punkte. Zeitlimit."
+help_mode1_2,"Bonus leaves score extra. Completing a level adds time by clearing the branch.","Las hojas bonus dan extra. Completar un nivel da tiempo.","Les feuilles bonus rapportent plus. Un niveau donne du temps.","Bonus-Blätter geben extra. Level gibt Zeit."
+help_mode2_1,"Remove all the leaves from the tree as fast as possible by matching 3+.","Sacá todas las hojas del árbol lo más rápido posible.","Retirez toutes les feuilles le plus vite possible.","Entferne alle Blätter so schnell wie möglich."
+help_mode2_2,"The hedgehog shows progress. Bonus leaves score double.","El erizo marca el progreso. Las bonus valen doble.","Le hérisson montre la progression. Bonus x2.","Igel zeigt Fortschritt. Bonus doppelt."
+help_mode3_1,The goal is to score the most points in exactly 100 seconds.,Sumá el máximo en exactamente 100 segundos.,Marquez le plus en 100 secondes.,Möglichst viele Punkte in 100 Sekunden.
+start_at_level_10,"You seem to be good, maybe do you want to start this game at level 10?","Parece que sos bueno, ¿empezamos en nivel 10?","Vous voulez commencer au niveau 10 ?","Bei Level 10 starten?"
+start_at_level_10_yes,Jump to level 10!,¡Saltar al nivel 10!,Aller au niveau 10!,Zu Level 10!
+support_us,Support us,Apoyanos,Soutenez-nous,Unterstützt uns
+about_us,About us,Sobre nosotros,À propos,Über uns
+leaderboard,Leaderboard,Clasificación,Classement,Bestenliste

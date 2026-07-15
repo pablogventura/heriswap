@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b7vmq1nmih0aw"
+
+[deps]
+
+files=["res://localization/heriswap.en.translation", "res://localization/heriswap.es.translation", "res://localization/heriswap.fr.translation", "res://localization/heriswap.de.translation"]
+
+source_file="res://localization/heriswap.csv"
+dest_files=["res://localization/heriswap.en.translation", "res://localization/heriswap.es.translation", "res://localization/heriswap.fr.translation", "res://localization/heriswap.de.translation"]
+
+[params]
+
+compress=true
+delimiter=0
