@@ -64,6 +64,9 @@ func _ready() -> void:
 	decor = MatchDecor.new()
 	add_child(decor)
 	move_child(decor, 0)
+	# Scene ColorRect sits above Node2D decor; hide it once craft backdrop is live.
+	if has_node("ColorRect") and ResourceLoader.exists("res://assets/textures/menu/match_bg.png"):
+		$ColorRect.visible = false
 
 	branch_view = BranchLeavesView.new()
 	add_child(branch_view)

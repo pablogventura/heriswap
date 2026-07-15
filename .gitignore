@@ -19,3 +19,8 @@ local.properties
 build/
 sources/HeriswapGitVersion.h
 android/proguard-project.txt
+
+# Paper gen / secrets
+.env
+tools/paper_gen/out/
+tools/paper_gen/.venv/

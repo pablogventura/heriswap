@@ -109,9 +109,10 @@ static func style_button(btn: BaseButton) -> void:
 static func _style_button_font(btn: BaseButton) -> void:
 	btn.add_theme_font_override("font", font())
 	btn.add_theme_font_size_override("font_size", 24)
-	btn.add_theme_color_override("font_color", Color(0.12, 0.18, 0.12))
-	btn.add_theme_color_override("font_hover_color", Color(0.05, 0.1, 0.05))
-	btn.add_theme_color_override("font_pressed_color", Color(0.2, 0.25, 0.1))
+	# Ink on cream paper labels.
+	btn.add_theme_color_override("font_color", Color(0.22, 0.16, 0.12))
+	btn.add_theme_color_override("font_hover_color", Color(0.14, 0.1, 0.08))
+	btn.add_theme_color_override("font_pressed_color", Color(0.3, 0.22, 0.14))
 
 
 static func style_label(label: Label, size: int = 28) -> void:

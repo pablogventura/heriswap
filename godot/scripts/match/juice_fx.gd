@@ -159,16 +159,16 @@ func combo_banner(chain: int) -> void:
 	if chain < 2 or combo_label == null:
 		return
 	var word := "Nice!"
-	var col := Color(1.0, 0.95, 0.55)
+	var col := Color(0.92, 0.72, 0.28)
 	if chain >= 6:
 		word = "Legendary!"
-		col = Color(1.0, 0.45, 0.85)
+		col = Color(0.78, 0.38, 0.55)
 	elif chain >= 4:
 		word = "Awesome!"
-		col = Color(1.0, 0.7, 0.25)
+		col = Color(0.9, 0.55, 0.22)
 	elif chain >= 3:
 		word = "Great!"
-		col = Color(0.45, 1.0, 0.55)
+		col = Color(0.35, 0.62, 0.42)
 	combo_label.text = word
 	combo_label.label_settings = UiTheme.label_settings(64, col)
 	combo_label.visible = true

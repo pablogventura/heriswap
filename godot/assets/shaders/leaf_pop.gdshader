@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform float pop : hint_range(0.0, 1.5) = 0.0;
-uniform vec4 pop_color : source_color = vec4(1.0, 1.0, 0.85, 1.0);
+uniform vec4 pop_color : source_color = vec4(0.98, 0.93, 0.78, 1.0);
 
 void fragment() {
 	vec4 tex = texture(TEXTURE, UV);

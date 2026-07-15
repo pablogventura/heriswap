@@ -39,7 +39,7 @@ func _show_page() -> void:
 	var bg_path := "res://assets/textures/help/%s.png" % str(page.get("bg", "bg_help_howto"))
 	if ResourceLoader.exists(bg_path):
 		$HelpBg.texture = load(bg_path)
-		$HelpBg.modulate = Color(1, 1, 1, 0.55)
+		$HelpBg.modulate = Color(1, 1, 1, 0.82)
 	for c in $Icons.get_children():
 		c.queue_free()
 	for name in page.icons:

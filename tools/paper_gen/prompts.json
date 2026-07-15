@@ -1,0 +1,316 @@
+{
+  "style_prefix": "Photographed handmade paper craft collage made by primary-school children on a messy wooden school desk. Layered scraps of construction paper, newspaper with only blurry illegible texture (no readable headlines), magazine gloss bits, shiny gift-wrap foil, kraft paper. Mix of imperfect scissors-cut jagged edges and hand-torn fibrous white edges. Crooked masking tape, glue stains, slightly crooked layers. Soft classroom daylight, paper grain, soft contact shadow under the craft. Photoreal craft object. Not digital flat illustration, not CGI, not plastic toys, not neon candy, not clean Instagram scrapbook, not laser-cut perfect edges.",
+  "assets": [
+    {
+      "id": "feuille1",
+      "dest": "godot/assets/textures/feuilles/feuille1.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 220,
+      "prompt": "Centered five-point star paper craft collage, dominant bright yellow construction paper with foil accents, clear star silhouette, transparent background."
+    },
+    {
+      "id": "feuille2",
+      "dest": "godot/assets/textures/feuilles/feuille2.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 220,
+      "prompt": "Centered heart shape paper craft collage, dominant red construction paper with hand-torn fibrous edges, clear heart silhouette, transparent background."
+    },
+    {
+      "id": "feuille3",
+      "dest": "godot/assets/textures/feuilles/feuille3.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 200,
+      "prompt": "Centered circle coin paper craft from newsprint and blue grid notebook paper layers, clear round silhouette, transparent background."
+    },
+    {
+      "id": "feuille4",
+      "dest": "godot/assets/textures/feuilles/feuille4.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 220,
+      "prompt": "Centered simple flower paper craft with overlapping construction-paper petals and a magazine-scarp center, clear flower silhouette, transparent background."
+    },
+    {
+      "id": "feuille5",
+      "dest": "godot/assets/textures/feuilles/feuille5.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 220,
+      "prompt": "Centered cute simple paper fish collage (or tiny bird), multi-layer papers, googly paper eye circle, clear silhouette, transparent background."
+    },
+    {
+      "id": "feuille6",
+      "dest": "godot/assets/textures/feuilles/feuille6.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 220,
+      "prompt": "Centered triangle pennant / flag paper craft from shiny gift-wrap paper with tape strip, clear triangle silhouette, transparent background."
+    },
+    {
+      "id": "feuille7",
+      "dest": "godot/assets/textures/feuilles/feuille7.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 220,
+      "prompt": "Centered simple primary-school sun OR house paper craft (choose sun), kraft and yellow/orange construction paper rays, clear silhouette, transparent background."
+    },
+    {
+      "id": "feuille8",
+      "dest": "godot/assets/textures/feuilles/feuille8.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 220,
+      "prompt": "Centered smiling cloud or small paper rainbow collage of matte coloured construction paper layers with simple paper face, clear silhouette, transparent background."
+    },
+    {
+      "id": "herisson_1_1",
+      "dest": "godot/assets/textures/feuilles/herisson_1_1.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Cute side-view hedgehog paper craft collage, skin A: kraft body, spikes made of torn newsprint and brown construction strips, round paper eyes, messy kids craft, transparent background."
+    },
+    {
+      "id": "herisson_1_2",
+      "dest": "godot/assets/textures/feuilles/herisson_1_2.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Same kraft/newsprint hedgehog paper collage walking pose, legs slightly forward, transparent background."
+    },
+    {
+      "id": "herisson_1_3",
+      "dest": "godot/assets/textures/feuilles/herisson_1_3.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Same kraft/newsprint hedgehog paper collage mid-step pose, transparent background."
+    },
+    {
+      "id": "herisson_2_1",
+      "dest": "godot/assets/textures/feuilles/herisson_2_1.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Cute side-view hedgehog paper craft, skin B: bright colourful construction-paper body, spikes of mixed primary colours with tape bits, round paper eyes, transparent background."
+    },
+    {
+      "id": "herisson_2_2",
+      "dest": "godot/assets/textures/feuilles/herisson_2_2.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Same colourful construction-paper hedgehog walking pose, transparent background."
+    },
+    {
+      "id": "herisson_2_3",
+      "dest": "godot/assets/textures/feuilles/herisson_2_3.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Same colourful construction-paper hedgehog mid-step, transparent background."
+    },
+    {
+      "id": "herisson_3_1",
+      "dest": "godot/assets/textures/feuilles/herisson_3_1.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Cute side-view hedgehog paper craft, skin C: magazine gloss and shiny foil spikes, cream paper body, round eyes, transparent background."
+    },
+    {
+      "id": "herisson_3_2",
+      "dest": "godot/assets/textures/feuilles/herisson_3_2.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Same magazine/foil hedgehog walking pose, transparent background."
+    },
+    {
+      "id": "herisson_3_3",
+      "dest": "godot/assets/textures/feuilles/herisson_3_3.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 280,
+      "prompt": "Same magazine/foil hedgehog mid-step, transparent background."
+    },
+    {
+      "id": "branche",
+      "dest": "godot/assets/textures/sprites/branche.png",
+      "transparent": true,
+      "size": "1536x1024",
+      "fit_w": 400,
+      "fit_h": 110,
+      "prompt": "Horizontal paper branch / ledge collage: long kraft and brown construction strips taped together, crooked, kids craft, transparent background."
+    },
+    {
+      "id": "back",
+      "dest": "godot/assets/textures/menu/back.png",
+      "transparent": false,
+      "size": "1024x1536",
+      "fit_w": 800,
+      "fit_h": 1280,
+      "prompt": "Full-frame messy primary-school wooden desk top photographed from above, cluttered with coloured paper scraps, tape, glue stains, soft daylight, no people, warm wood."
+    },
+    {
+      "id": "1erplan",
+      "dest": "godot/assets/textures/menu/1erplan.png",
+      "transparent": true,
+      "size": "1024x1536",
+      "fit_w": 800,
+      "fit_h": 570,
+      "prompt": "Foreground paper scrap collage layer for a phone menu: scattered torn construction paper, tape, crayon bits along bottom half, mostly transparent empty upper area, messy kids craft, transparent background."
+    },
+    {
+      "id": "2emeplan",
+      "dest": "godot/assets/textures/menu/2emeplan.png",
+      "transparent": true,
+      "size": "1024x1536",
+      "fit_w": 800,
+      "fit_h": 570,
+      "prompt": "Midground paper scrap collage layer: soft unfocused paper clouds and scraps, messy school craft desk backdrop pieces, mostly upper half, transparent background."
+    },
+    {
+      "id": "fond_menu_mode",
+      "dest": "godot/assets/textures/menu/fond_menu_mode.png",
+      "transparent": false,
+      "size": "1024x1536",
+      "fit_w": 356,
+      "fit_h": 562,
+      "prompt": "Portrait scrapbook page of messy kids paper collage on wood desk, soft daylight, no readable text, fills frame."
+    },
+    {
+      "id": "fond_bouton",
+      "dest": "godot/assets/textures/menu/fond_bouton.png",
+      "transparent": true,
+      "size": "1536x1024",
+      "fit_w": 354,
+      "fit_h": 74,
+      "prompt": "Wide horizontal paper label button: rectangle of cream construction paper with crooked masking tape corners, slight torn edges, flat UI-friendly, transparent background outside the label."
+    },
+    {
+      "id": "sac",
+      "dest": "godot/assets/textures/menu/sac.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 160,
+      "prompt": "Cute paper craft soup pot or satchel icon collage for a kids game about button, multi-layer construction paper, transparent background."
+    },
+    {
+      "id": "soupe_logo",
+      "dest": "godot/assets/textures/logo/soupe_logo.png",
+      "transparent": true,
+      "size": "1024x1536",
+      "fit_w": 800,
+      "fit_h": 600,
+      "prompt": "Paper craft game logo collage spelling HERISWAP roughly with cut paper letters, chaotic primary-school style, with a small paper hedgehog accent, transparent background."
+    },
+    {
+      "id": "bg_help_howto",
+      "dest": "godot/assets/textures/help/bg_help_howto.png",
+      "transparent": false,
+      "size": "1024x1536",
+      "fit_w": 400,
+      "fit_h": 640,
+      "prompt": "Help screen paper collage background: scrap papers explaining swap matching with simple icons only, no readable English paragraphs, messy kids craft on desk."
+    },
+    {
+      "id": "bg_help_obj_score",
+      "dest": "godot/assets/textures/help/bg_help_obj_score.png",
+      "transparent": false,
+      "size": "1024x1536",
+      "fit_w": 400,
+      "fit_h": 640,
+      "prompt": "Help screen paper collage background themed around score stars and hearts paper crafts, no readable paragraphs, messy kids craft."
+    },
+    {
+      "id": "bg_help_obj_time",
+      "dest": "godot/assets/textures/help/bg_help_obj_time.png",
+      "transparent": false,
+      "size": "1024x1536",
+      "fit_w": 400,
+      "fit_h": 640,
+      "prompt": "Help screen paper collage background themed around a paper clock craft, no readable paragraphs, messy kids craft."
+    },
+    {
+      "id": "decor1er_0",
+      "dest": "godot/assets/textures/decor1/decor1er_0.png",
+      "transparent": true,
+      "size": "1536x1024",
+      "fit_w": 404,
+      "fit_h": 150,
+      "prompt": "Wide ground strip of torn kraft and green construction paper hills collage, transparent background."
+    },
+    {
+      "id": "decor1er_1",
+      "dest": "godot/assets/textures/decor1/decor1er_1.png",
+      "transparent": true,
+      "size": "1536x1024",
+      "fit_w": 404,
+      "fit_h": 150,
+      "prompt": "Wide ground strip of colourful torn construction paper hills collage, transparent background."
+    },
+    {
+      "id": "decor2nd_0",
+      "dest": "godot/assets/textures/decor2/decor2nd_0.png",
+      "transparent": true,
+      "size": "1536x1024",
+      "fit_w": 404,
+      "fit_h": 235,
+      "prompt": "Wide background paper landscape collage of distant torn blue and lilac papers, transparent background."
+    },
+    {
+      "id": "haut_0",
+      "dest": "godot/assets/textures/nuages/haut_0.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 180,
+      "prompt": "Fluffy white and light-blue torn paper cloud collage, transparent background."
+    },
+    {
+      "id": "moyen_0",
+      "dest": "godot/assets/textures/nuages/moyen_0.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 160,
+      "prompt": "Soft torn paper cloud collage slightly grey-blue, transparent background."
+    },
+    {
+      "id": "bas_0",
+      "dest": "godot/assets/textures/nuages/bas_0.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 150,
+      "prompt": "Low paper cloud scrap collage creamy white torn edges, transparent background."
+    },
+    {
+      "id": "snow_flake0",
+      "dest": "godot/assets/textures/snow/snow_flake0.png",
+      "transparent": true,
+      "size": "1024x1024",
+      "fit": 48,
+      "prompt": "Tiny irregular scrap of coloured construction paper confetti piece, not a snowflake crystal, transparent background."
+    }
+  ],
+  "alphabet": [
+    {"id": "30_typo", "char": "0", "dest": "godot/assets/textures/alphabet/30_typo.png"},
+    {"id": "31_typo", "char": "1", "dest": "godot/assets/textures/alphabet/31_typo.png"},
+    {"id": "32_typo", "char": "2", "dest": "godot/assets/textures/alphabet/32_typo.png"},
+    {"id": "33_typo", "char": "3", "dest": "godot/assets/textures/alphabet/33_typo.png"},
+    {"id": "34_typo", "char": "4", "dest": "godot/assets/textures/alphabet/34_typo.png"},
+    {"id": "35_typo", "char": "5", "dest": "godot/assets/textures/alphabet/35_typo.png"},
+    {"id": "36_typo", "char": "6", "dest": "godot/assets/textures/alphabet/36_typo.png"},
+    {"id": "37_typo", "char": "7", "dest": "godot/assets/textures/alphabet/37_typo.png"},
+    {"id": "38_typo", "char": "8", "dest": "godot/assets/textures/alphabet/38_typo.png"},
+    {"id": "39_typo", "char": "9", "dest": "godot/assets/textures/alphabet/39_typo.png"},
+    {"id": "2c_typo", "char": ",", "dest": "godot/assets/textures/alphabet/2c_typo.png"},
+    {"id": "2d_typo", "char": "-", "dest": "godot/assets/textures/alphabet/2d_typo.png"},
+    {"id": "2e_typo", "char": ".", "dest": "godot/assets/textures/alphabet/2e_typo.png"},
+    {"id": "2f_typo", "char": "/", "dest": "godot/assets/textures/alphabet/2f_typo.png"},
+    {"id": "3a_typo", "char": ":", "dest": "godot/assets/textures/alphabet/3a_typo.png"}
+  ],
+  "alphabet_prompt": "Single cut-out paper character '{char}' made from construction paper or newsprint collage, hand-cut or torn edges, centered, bold readable glyph for a kids game HUD, transparent background, no other objects."
+}

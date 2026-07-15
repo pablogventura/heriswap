@@ -14,7 +14,6 @@ source_file="res://assets/textures/feuilles/herisson_2_2.png"
 dest_files=["res://.godot/imported/herisson_2_2.png-1520c2b244a4c326814ed49f3b37356e.ctex"]
 
 [params]
-process/filter=0
 
 compress/mode=0
 compress/high_quality=false
