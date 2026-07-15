@@ -1,53 +1,70 @@
-Heriswap is a match-3 game, published on Android ([Google Play](https://play.google.com/store/apps/details?id=net.damsy.soupeaucaillou.heriswap), [F-droid](https://f-droid.org/repository/browse/?fdfilter=heriswap&fdid=net.damsy.soupeaucaillou.heriswap) and [direct download](http://soupeaucaillou.com/games/Heriswap.apk)). It can also run on Linux, Windows, MacOSX and iOS devices.
+# Heriswap (Godot rewrite)
 
-[It uses sac (Soupe au Caillou) 2D engine](https://github.com/soupeaucaillou/sac).
+Match-3 leaf game rewritten in **Godot 4.4** (GDScript).
 
-#Prerequesites (at least)
-* All: `git`
-* Linux: `cmake g++`
-* Android: android-sdk and android-ndk
+The original C++ / [sac](https://github.com/SoupeauCaillou/sac) implementation remains in this repository as **reference** (`sources/`, `android/`, `assets/`, `datas/`). The playable product is under [`godot/`](godot/).
 
-#Get the sources
-`git clone --recursive git://git.damsy.net/sac/heriswap`
+## Requirements
 
-#How to build
-To build the game, you can use script 'sac/tools/build/build-all.sh'.
-Use -h to get available options.
+- Godot **4.4+**
+- Optional: Android SDK/NDK for APK export
 
-##For Unix/Linux
-* Build and launch:
-`./sac/tools/build/build-all.sh --target linux n`
+## Run
 
-##For Android
-* Build APK, install it on any plugged device and launch it:
-`./sac/tools/build/build-all.sh --target android n -p -i r`
+```bash
+cd godot
+godot --path .
+```
 
-* Generate a signed APK:
-`./sac/tools/build/android_generate_signed_apk.sh`
+## Tests
 
-* Generate a free build (excluding Google Play services):
-`./android_fdroid_APK.sh`
+```bash
+cd godot
+godot --headless --path . -s res://test/test_grid.gd --quit-after 15
+```
 
-#License
-See [License file](LICENSE).
+Expect `TEST_GRID_OK`.
 
-#Author
-* Gautier Pelloux-Prayer <gautier@damsy.net>, developer
-* Jordane Pelloux-Prayer <jordane@damsy.net>, developer
-* Marion Pelloux-Prayer <marion@damsy.net>, graphist & sound
-* Pierre-Eric Pelloux-Prayer <pierre-eric@damsy.net>, developer
+## Export
 
------------
+Presets in `godot/export_presets.cfg`:
 
-* Special thanks to our translators from www.transifex.com [(you can help us too!)](www.transifex.com):
-  * xesusmosquera  for Galician (Spain)
-  * fmoliveira  for Portuguese (Brazil)
-  * kokumaro  for Japanese
-  * Nienke84 and darwinel  for Dutch
-  * Brainmote  for Italian
-  * kingu  for Norwegian
+| Preset | Package |
+|--------|---------|
+| Linux / Windows | desktop binaries |
+| Android Play | `net.damsy.soupeaucaillou.heriswap2` |
+| Android F-Droid | same package + `fdroid` feature (no Google services) |
 
-#Contact
-If you are willing to contact us, please email us at soupeaucaillou@damsy.net.
+This is a **new** Android package (clean rewrite), not an update of `net.damsy.soupeaucaillou.heriswap`.
 
+## Features
 
+- 3 modes × 3 difficulties (Score race, Time attack, 100 seconds)
+- Match-3 grid with swap, delete, fall, spawn, no-move reset
+- Menus, help, pause, high scores (JSON), mid-game resume
+- Local achievements + `PlatformServices` stubs (Play Games / IAP offline-first)
+- i18n CSV (`en`, `es`, `fr`, `de`)
+
+## Legacy C++ build
+
+See historical instructions below only if you need the sac engine build. It is **not** required for the Godot game.
+
+<details>
+<summary>Original C++ / sac build (reference)</summary>
+
+Prerequisites: `git`, `cmake`, `g++`; Android SDK/NDK for APK.
+
+```bash
+git submodule update --init --recursive
+./sac/tools/build/build-all.sh --target linux n
+```
+
+</details>
+
+## License
+
+GPL-3 for code (see [LICENSE](LICENSE)). Artwork: CC-by (see LICENSE). Engine exceptions for sac remain under `sac/LICENSE` when the submodule is present.
+
+## Authors
+
+Soupe au Caillou - original game. Godot port lives in `godot/`.
