@@ -22,7 +22,7 @@ Morph phases animate sprites first (`_animating` / `_swap_locked`), then commit 
 
 ## Match juice
 
-`JuiceFx` owns candy-like feedback: `CPUParticles2D` bursts, float text, combo banners, grid shake, `leaf_glow` / `screen_flash` shaders, drag trail. Wired from `match_root.gd` on swap/delete/fall/spawn/level-up/squall. Do not leave glow materials on sprites during level-up desaturate (`juice.level_locked`).
+`JuiceFx` owns candy-like feedback: layered `CPUParticles2D` bursts, shockwave rings, explode arcs, float text, combo banners, grid shake/zoom punch, `leaf_glow` / `leaf_pop` / `screen_flash` shaders, drag trail. Wired from `match_root.gd` on swap/delete/fall/spawn/level-up/squall. Do not leave glow materials on sprites during level-up desaturate (`juice.level_locked`). Intensity scales with `juice_scale(combo_chain)`.
 
 ## UI
 

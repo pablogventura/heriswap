@@ -25,9 +25,9 @@ cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15
 ## Features
 
 - Match-3 with difficulty timings, ADSR-like morph tweens, branch leaves, hedgehog hint, decor
-- **Match juice** (`JuiceFx`): colored bursts, combo banners, float `+score`, camera punch, screen flash shader, leaf glow, drag trail
-- Level-up FX (snow + desaturate + confetti), denser Go100 squall with punch
-- Multi-track jukebox + stress ramp + pitch-ramped combo SFX
+- **Match juice** (`JuiceFx`): layered bursts, shockwaves, explode arcs, anticipation swap, land squash, drop-in spawn, combo banners, float `+score`, camera/zoom punch, screen flash / leaf glow / leaf_pop shaders, drag trail
+- Level-up FX (snow + desaturate + confetti + shockwave), denser Go100 squall with punch
+- Multi-track jukebox + stress ramp + hot combo pitch (cap 1.55) + rare high-chain stinger
 - Menus on fixed 800×1280 Control layout with original art (`fond_bouton`, layered plans, SAC)
 - FreeMono theme + selective alphabet bitmap digits on HUD / scores (pulse on change)
 - Scores JSON, mid-game resume, 20 local achievements (SuccessManager thresholds)
@@ -41,7 +41,8 @@ cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15
 - [ ] ModeMenu modes/diffs/scores + alphabet best score digits
 - [ ] Countdown curtain + numbers
 - [ ] Match: swap lerp, delete fade, fall, spawn grow
-- [ ] Juice: match bursts, combo text, trail glow, shake/flash
+- [ ] Juice: bursts, explode arcs, shockwave, trail glow, shake/zoom
+- [ ] Juice: anticipation swap, land squash, drop-in spawn, ProgressBar flash
 - [ ] Level-up text/snow/confetti; Go100 squall burst
 - [ ] Help backgrounds cycle with pages
 - [ ] Pause panel buttons readable / micro punch
