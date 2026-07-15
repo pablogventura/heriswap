@@ -28,15 +28,21 @@ var restore_paused: bool = false
 var elite_pending: bool = false
 
 @onready var grid_layer: Node2D = $GridLayer
+@onready var playfield: Control = $PlayfieldInput
 @onready var hud_label: Label = $HUD/ScoreLabel
 @onready var progress_bar: ProgressBar = $HUD/ProgressBar
 @onready var pause_panel: Panel = $PausePanel
 @onready var hint_btn: Button = $HUD/HintButton
 @onready var pause_btn: Button = $HUD/PauseButton
 
+var _dragging: bool = false
+var _swap_locked: bool = false
+
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	if has_node("ColorRect"):
+		$ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_load_textures()
 	timings = TimingConfig.for_difficulty(GameFlow.selected_difficulty)
 	grid = GridModel.new()
@@ -60,6 +66,7 @@ func _ready() -> void:
 	hedgehog.tapped.connect(_on_hint)
 
 	_setup_fx_nodes()
+	_wire_playfield()
 
 	var snapshot := RunSnapshot.load_run()
 	if not snapshot.is_empty() and int(snapshot.get("mode", -1)) == GameFlow.selected_mode:
@@ -99,8 +106,24 @@ func _ready() -> void:
 	$PausePanel/VBox/Restart.pressed.connect(_restart_run)
 	if mode is Go100SecondsMode:
 		(mode as Go100SecondsMode).squall_started.connect(_on_squall)
+	# Keep playfield above world visuals but under HUD/pause.
+	move_child(playfield, get_child_count() - 1)
+	move_child($HUD, get_child_count() - 1)
+	move_child(pause_panel, get_child_count() - 1)
+	UiTheme.style_label(hud_label, 28)
 	if restore_paused:
 		_toggle_pause()
+
+
+func _wire_playfield() -> void:
+	if playfield == null:
+		playfield = Control.new()
+		playfield.name = "PlayfieldInput"
+		playfield.set_anchors_preset(Control.PRESET_FULL_RECT)
+		playfield.offset_top = 150.0
+		add_child(playfield)
+	playfield.mouse_filter = Control.MOUSE_FILTER_STOP
+	playfield.gui_input.connect(_on_playfield_input)
 
 
 func _setup_fx_nodes() -> void:
@@ -259,28 +282,67 @@ func _screen_to_cell(screen: Vector2) -> Vector2i:
 	return Vector2i(x, y)
 
 
-func _gui_input(event: InputEvent) -> void:
-	if phase != Phase.USER_INPUT:
+func _event_to_root(local_in_playfield: Vector2) -> Vector2:
+	if playfield == null:
+		return local_in_playfield
+	return local_in_playfield + playfield.position
+
+
+func _on_playfield_input(event: InputEvent) -> void:
+	if phase != Phase.USER_INPUT or _swap_locked:
 		return
 	if event is InputEventScreenTouch:
 		var st := event as InputEventScreenTouch
+		var pos := _event_to_root(st.position)
 		if st.pressed:
-			drag_start = _screen_to_cell(st.position)
+			_dragging = true
+			_swap_locked = false
+			drag_start = _screen_to_cell(pos)
 		else:
-			_try_swap(drag_start, _screen_to_cell(st.position))
+			if _dragging and not _swap_locked:
+				_try_swap(drag_start, _screen_to_cell(pos))
+			_dragging = false
 			drag_start = Vector2i(-1, -1)
+	elif event is InputEventScreenDrag:
+		var sd := event as InputEventScreenDrag
+		if not _dragging or _swap_locked:
+			return
+		var cell := _screen_to_cell(_event_to_root(sd.position))
+		if cell != drag_start and abs(cell.x - drag_start.x) + abs(cell.y - drag_start.y) == 1:
+			_try_swap(drag_start, cell)
 	elif event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
 		if mb.button_index != MOUSE_BUTTON_LEFT:
 			return
+		var mpos := _event_to_root(mb.position)
 		if mb.pressed:
-			drag_start = _screen_to_cell(mb.position)
+			_dragging = true
+			_swap_locked = false
+			drag_start = _screen_to_cell(mpos)
 		else:
-			_try_swap(drag_start, _screen_to_cell(mb.position))
+			if _dragging and not _swap_locked:
+				_try_swap(drag_start, _screen_to_cell(mpos))
+			_dragging = false
 			drag_start = Vector2i(-1, -1)
+	elif event is InputEventMouseMotion:
+		var mm := event as InputEventMouseMotion
+		if not _dragging or _swap_locked:
+			return
+		if not (mm.button_mask & MOUSE_BUTTON_MASK_LEFT):
+			return
+		var cell2 := _screen_to_cell(_event_to_root(mm.position))
+		if cell2 != drag_start and abs(cell2.x - drag_start.x) + abs(cell2.y - drag_start.y) == 1:
+			_try_swap(drag_start, cell2)
+
+
+func _gui_input(_event: InputEvent) -> void:
+	# PlayfieldInput owns gameplay clicks.
+	pass
 
 
 func _try_swap(a: Vector2i, b: Vector2i) -> void:
+	if _swap_locked:
+		return
 	if not grid.is_valid(a.x, a.y) or not grid.is_valid(b.x, b.y):
 		return
 	if abs(a.x - b.x) + abs(a.y - b.y) != 1:
@@ -290,6 +352,8 @@ func _try_swap(a: Vector2i, b: Vector2i) -> void:
 	if not grid.would_swap_match(a, b):
 		PlatformServices.vibrate(15)
 		return
+	_swap_locked = true
+	_dragging = false
 	grid.swap_cells(a, b)
 	AudioBus.play_swap()
 	_rebuild_sprites()
@@ -302,6 +366,7 @@ func _begin_delete() -> void:
 	if pending_combos.is_empty():
 		phase = Phase.USER_INPUT
 		combo_chain = 0
+		_swap_locked = false
 		return
 	combo_chain += 1
 	Achievements.s_bim_bam_boum(combo_chain)
@@ -377,6 +442,8 @@ func _finish_spawn() -> void:
 		return
 	combo_chain = 0
 	phase = Phase.USER_INPUT
+	_swap_locked = false
+	_dragging = false
 	_save_snapshot()
 
 
@@ -385,7 +452,8 @@ func _start_level_changed() -> void:
 	phase_timer = timings.level_changed
 	level_label.text = "%s %d" % [tr("level"), mode.level]
 	level_label.visible = true
-	desaturate_rect.visible = true
+	desaturate_rect.visible = false
+	_apply_grid_desaturate(true)
 	snow_particles.emitting = true
 	if mode.level == 10 and GameFlow.selected_difficulty != Difficulty.HARD:
 		elite_pending = true
@@ -393,12 +461,13 @@ func _start_level_changed() -> void:
 
 func _end_level_changed() -> void:
 	level_label.visible = false
-	desaturate_rect.visible = false
+	_apply_grid_desaturate(false)
 	snow_particles.emitting = false
 	if elite_pending:
 		elite_pending = false
 		phase = Phase.SPAWN
 		phase_timer = timings.spawn
+		_swap_locked = false
 		_save_snapshot()
 		GameFlow.go_elite()
 		return
@@ -408,9 +477,45 @@ func _end_level_changed() -> void:
 	_rebuild_sprites()
 
 
+func _apply_grid_desaturate(on: bool) -> void:
+	var mat: ShaderMaterial = null
+	if on and ResourceLoader.exists("res://assets/shaders/desaturate.gdshader"):
+		mat = ShaderMaterial.new()
+		mat.shader = load("res://assets/shaders/desaturate.gdshader")
+	for spr in sprites.values():
+		if is_instance_valid(spr):
+			spr.material = mat
+
+
 func _on_squall(bonus: int) -> void:
 	hedgehog.setup_skins(bonus)
 	AudioBus.play_match()
+	_spawn_squall_leaves(bonus)
+
+
+func _spawn_squall_leaves(bonus: int) -> void:
+	var tex: Texture2D = leaf_textures[clampi(bonus, 0, leaf_textures.size() - 1)]
+	for i in 24:
+		var body := RigidBody2D.new()
+		body.gravity_scale = 0.35
+		var spr := Sprite2D.new()
+		spr.texture = tex
+		spr.scale = Vector2(0.4, 0.4)
+		body.add_child(spr)
+		var shape := CollisionShape2D.new()
+		var circle := CircleShape2D.new()
+		circle.radius = 18.0
+		shape.shape = circle
+		body.add_child(shape)
+		body.position = Vector2(-80.0 - i * 30.0, 180.0 + (i % 5) * 40.0)
+		body.linear_velocity = Vector2(380.0 + i * 12.0, randf_range(-40.0, 60.0))
+		body.angular_velocity = randf_range(-4.0, 4.0)
+		add_child(body)
+		var killer := get_tree().create_timer(2.8)
+		killer.timeout.connect(func():
+			if is_instance_valid(body):
+				body.queue_free()
+		)
 
 
 func _on_hint() -> void:

@@ -12,6 +12,7 @@ func _ready() -> void:
 	bg.size = Vector2(800, 1280)
 	bg.color = Color(0.45, 0.72, 0.88, 1)
 	bg.z_index = -20
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bg)
 	_decor2 = _make_sprite([
 		"res://assets/textures/decor2/2emeplan.png",
