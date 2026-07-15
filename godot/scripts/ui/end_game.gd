@@ -2,6 +2,8 @@ extends Control
 
 
 func _ready() -> void:
+	UiTheme.apply_backdrop(self)
+	UiTheme.style_buttons_in($VBox)
 	var s: Dictionary = GameFlow.last_score
 	var high := SaveService.is_high_score(
 		int(s.get("mode", 0)), int(s.get("difficulty", 0)),

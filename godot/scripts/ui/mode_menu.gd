@@ -1,10 +1,11 @@
 extends Control
 
-var mode: int = 0
-var difficulty: int = Difficulty.EASY
-
 
 func _ready() -> void:
+	UiTheme.apply_backdrop(self, "res://assets/textures/menu/fond_menu_mode.png")
+	UiTheme.style_buttons_in($VBox)
+	UiTheme.style_label($VBox/ModeLabel, 32)
+	UiTheme.style_label($VBox/DiffLabel, 24)
 	$VBox/ModeNormal.text = tr("mode_1")
 	$VBox/ModeTiles.text = tr("mode_2")
 	$VBox/Mode100.text = tr("mode_3")
@@ -13,6 +14,7 @@ func _ready() -> void:
 	$VBox/DiffHard.text = tr("diff_3")
 	$VBox/Help.text = tr("help")
 	$VBox/Play.text = tr("play")
+	$VBox/Back.text = tr("quit")
 	$VBox/ModeNormal.pressed.connect(func(): _set_mode(0))
 	$VBox/ModeTiles.pressed.connect(func(): _set_mode(1))
 	$VBox/Mode100.pressed.connect(func(): _set_mode(2))
@@ -24,6 +26,10 @@ func _ready() -> void:
 	$VBox/Back.pressed.connect(func(): GameFlow.go_main_menu())
 	_refresh()
 	_refresh_scores()
+
+
+var mode: int = 0
+var difficulty: int = Difficulty.EASY
 
 
 func _set_mode(m: int) -> void:
@@ -58,6 +64,7 @@ func _refresh_scores() -> void:
 	if top.size() > 0:
 		lines.append("%s %d" % [tr("average_score"), int(float(sum_pts) / float(top.size()))])
 	$VBox/Scores.text = "\n".join(lines)
+	UiTheme.style_label($VBox/Scores, 18)
 
 
 func _all_top_over_100k() -> bool:

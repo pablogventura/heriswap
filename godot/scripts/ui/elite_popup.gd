@@ -2,6 +2,8 @@ extends Control
 
 
 func _ready() -> void:
+	UiTheme.apply_backdrop(self)
+	UiTheme.style_buttons_in($VBox)
 	$VBox/Text.text = tr("change_difficulty")
 	$VBox/Yes.text = tr("change_difficulty_yes")
 	$VBox/No.text = tr("change_difficulty_no")
@@ -10,6 +12,5 @@ func _ready() -> void:
 		GameFlow.begin_run(GameFlow.selected_mode, GameFlow.selected_difficulty, 1)
 	)
 	$VBox/No.pressed.connect(func():
-		# Continue current run after level 10 celebration.
 		GameFlow.go_match()
 	)
