@@ -10,7 +10,7 @@ config/description="Match-3 leaf game - Godot rewrite"
 config/version="2.0.0"
 run/main_scene="res://scenes/menus/Logo.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://assets/textures/feuilles/feuille1.png"
+config/icon="res://assets/icons/icon.png"
 
 [autoload]
 

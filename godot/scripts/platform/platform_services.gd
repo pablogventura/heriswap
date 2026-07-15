@@ -1,6 +1,6 @@
 extends Node
 
-## Offline-first platform bridge. Real Google Play / IAP plug in here later.
+## Offline-first platform bridge.
 
 signal achievement_unlocked(id: String)
 signal purchase_finished(product_id: String, success: bool)
@@ -10,12 +10,25 @@ var _iap_enabled: bool = false
 
 
 func _ready() -> void:
-	# Feature flags: never require Google for gameplay.
-	_play_enabled = false
-	_iap_enabled = false
-	if OS.has_feature("android") and OS.get_environment("HERISWAP_ENABLE_PLAY") == "1":
-		_play_enabled = true
-		_iap_enabled = true
+	_refresh_flags()
+
+
+func _refresh_flags() -> void:
+	var fdroid := OS.has_feature("fdroid")
+	var android := OS.has_feature("android")
+	_play_enabled = android and not fdroid and (
+		OS.get_environment("HERISWAP_ENABLE_PLAY") == "1" or OS.has_feature("play")
+	)
+	_iap_enabled = _play_enabled
+	# Native plugin hook if present.
+	if Engine.has_singleton("GodotPlayGamesServices"):
+		_play_enabled = android and not fdroid
+	if Engine.has_singleton("GodotGooglePlayBilling"):
+		_iap_enabled = android and not fdroid
+
+
+func is_fdroid() -> bool:
+	return OS.has_feature("fdroid")
 
 
 func vibrate(ms: int = 30) -> void:
@@ -29,30 +42,43 @@ func open_url(url: String) -> void:
 
 func unlock_achievement(achievement_id: String) -> void:
 	achievement_unlocked.emit(achievement_id)
-	if _play_enabled:
-		# Hook for Play Games plugin.
+	if not _play_enabled:
+		return
+	if Engine.has_singleton("GodotPlayGamesServices"):
+		# Plugin-specific call would go here.
 		pass
 
 
 func submit_score(leaderboard_id: String, score: int) -> void:
-	if _play_enabled:
-		pass
-	else:
-		push_warning("PlatformServices: leaderboard stub %s=%d" % [leaderboard_id, score])
+	if not _play_enabled:
+		return
+	push_warning("PlatformServices: leaderboard %s=%d" % [leaderboard_id, score])
 
 
 func purchase_donate() -> void:
-	if not _iap_enabled:
+	if is_fdroid() or not _iap_enabled:
 		purchase_finished.emit("donate", false)
 		open_url("https://flattr.com/")
 		return
-	# Hook for billing plugin.
+	if Engine.has_singleton("GodotGooglePlayBilling"):
+		purchase_finished.emit("donate", false)
+		return
 	purchase_finished.emit("donate", false)
+	open_url("https://play.google.com/store/apps/details?id=%s" % application_id())
 
 
-func show_rate_dialog() -> void:
-	# Handled by RateIt scene in-game.
-	pass
+func show_rate_store() -> void:
+	if is_fdroid():
+		return
+	open_url("https://play.google.com/store/apps/details?id=%s" % application_id())
+
+
+func can_show_rate() -> bool:
+	return not is_fdroid()
+
+
+func can_show_leaderboard() -> bool:
+	return _play_enabled
 
 
 func is_play_enabled() -> bool:
