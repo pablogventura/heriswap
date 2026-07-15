@@ -81,8 +81,29 @@ func play_match_combo(chain: int) -> void:
 	if stream == null:
 		return
 	_sfx.stream = stream
-	_sfx.pitch_scale = 1.0 + 0.08 * float(mini(chain, 6))
+	_sfx.pitch_scale = clampf(1.0 + 0.11 * float(mini(chain, 8)), 1.0, 1.55)
 	_sfx.play()
+	if chain >= 5:
+		play_combo_stinger()
+
+
+func play_combo_stinger() -> void:
+	if not SaveService.is_sound_on():
+		return
+	var stinger := AudioStreamPlayer.new()
+	add_child(stinger)
+	var stream := load("res://assets/audio/level_up.ogg")
+	if stream == null:
+		stinger.queue_free()
+		return
+	stinger.stream = stream
+	stinger.volume_db = -10.0
+	stinger.pitch_scale = 1.2
+	stinger.play()
+	stinger.finished.connect(func():
+		if is_instance_valid(stinger):
+			stinger.queue_free()
+	)
 
 
 func play_invalid_swap() -> void:
