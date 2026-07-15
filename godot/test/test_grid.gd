@@ -76,6 +76,13 @@ func _init() -> void:
 	g100.score_calc(3, 0, g)
 	failed += _expect("100 scored", g100.points > 0)
 
+	failed += _expect(
+		"branch delete helper",
+		NormalMode.level_to_leave_to_delete(3, 5, 0, 6) >= 0
+	)
+	var timing := TimingConfig.for_difficulty(Difficulty.HARD)
+	failed += _expect("hard faster delete", timing.deletion < TimingConfig.for_difficulty(Difficulty.EASY).deletion)
+
 	if failed == 0:
 		print("TEST_GRID_OK")
 		quit(0)
