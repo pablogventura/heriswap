@@ -18,17 +18,17 @@ static func for_difficulty(diff: int) -> TimingConfig:
 			t.fall = 0.35
 			t.spawn = 0.28
 			t.swap = 0.28
-			t.level_changed = 2.0
+			t.level_changed = 2.4
 		Difficulty.MEDIUM:
 			t.deletion = 0.35
 			t.fall = 0.25
 			t.spawn = 0.2
 			t.swap = 0.22
-			t.level_changed = 1.6
+			t.level_changed = 2.0
 		_:
 			t.deletion = 0.22
 			t.fall = 0.16
 			t.spawn = 0.12
 			t.swap = 0.15
-			t.level_changed = 1.2
+			t.level_changed = 1.5
 	return t
