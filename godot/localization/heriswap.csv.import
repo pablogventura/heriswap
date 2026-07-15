@@ -6,10 +6,10 @@ uid="uid://b7vmq1nmih0aw"
 
 [deps]
 
-files=["res://localization/heriswap.en.translation", "res://localization/heriswap.es.translation", "res://localization/heriswap.fr.translation", "res://localization/heriswap.de.translation"]
+files=["res://localization/heriswap.en.translation", "res://localization/heriswap.de.translation", "res://localization/heriswap.el.translation", "res://localization/heriswap.es.translation", "res://localization/heriswap.fr.translation", "res://localization/heriswap.gl.translation", "res://localization/heriswap.it.translation", "res://localization/heriswap.ja.translation", "res://localization/heriswap.ms.translation", "res://localization/heriswap.nb.translation", "res://localization/heriswap.nl.translation", "res://localization/heriswap.pl.translation", "res://localization/heriswap.pt_BR.translation", "res://localization/heriswap.ru.translation", "res://localization/heriswap.tr.translation"]
 
 source_file="res://localization/heriswap.csv"
-dest_files=["res://localization/heriswap.en.translation", "res://localization/heriswap.es.translation", "res://localization/heriswap.fr.translation", "res://localization/heriswap.de.translation"]
+dest_files=["res://localization/heriswap.en.translation", "res://localization/heriswap.de.translation", "res://localization/heriswap.el.translation", "res://localization/heriswap.es.translation", "res://localization/heriswap.fr.translation", "res://localization/heriswap.gl.translation", "res://localization/heriswap.it.translation", "res://localization/heriswap.ja.translation", "res://localization/heriswap.ms.translation", "res://localization/heriswap.nb.translation", "res://localization/heriswap.nl.translation", "res://localization/heriswap.pl.translation", "res://localization/heriswap.pt_BR.translation", "res://localization/heriswap.ru.translation", "res://localization/heriswap.tr.translation"]
 
 [params]
 

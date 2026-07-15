@@ -1,48 +1,260 @@
-keys,en,es,fr,de
-continue_,Continue,Continuar,Continuer,Weiter
-help,Help,Ayuda,Aide,Hilfe
-give_up,Quit,Salir,Quitter,Beenden
-mode_1,Score race,Carrera de puntos,Course au score,Punkterennen
-mode_2,Time attack,Ataque temporal,Attaque temporelle,Zeitangriff
-mode_3,100 seconds,100 segundos,100 secondes,100 Sekunden
-score,Highscores:,Mejores marcas:,Meilleurs scores:,Highscores:
-play,Start,Empezar,Démarrer,Start
-restart,Restart,Reiniciar,Recommencer,Neustart
-diff_1,Easy,Fácil,Facile,Leicht
-diff_2,Medium,Medio,Moyen,Mittel
-diff_3,Hard,Difícil,Difficile,Schwer
-lvl,lvl,niv,niv,Lvl
-lvlcap,Lvl,Niv,Niv,Lvl
-enter_name,Enter your name,Escribe tu nombre,Entrez votre nom,Namen eingeben
-save_name,Save,Guardar,Enregistrer,Speichern
-congrats,New high score!,¡Nuevo récord!,Nouveau record !,Neuer Highscore!
-reuse_name,Or pick one:,O elige uno:,Ou choisissez :,Oder wählen:
-success,Success,Logros,Succès,Erfolge
-how_to_play,How to play?,¿Cómo jugar?,Comment jouer ?,Wie spielt man?
-bonus_x2,Bonus x2,Bonus x2,Bonus x2,Bonus x2
-objective,Goal,Objetivo,Objectif,Ziel
-level,Level,Nivel,Niveau,Level
-leave_left,leaves left,hojas restantes,feuilles restantes,Blätter übrig
-quit,Exit,Salir,Quitter,Beenden
-please_rate_it,"If you enjoy using Heriswap, please take a moment to rate it. Thanks for your support!","Si te gusta Heriswap, valóralo un momento. ¡Gracias!","Si vous aimez Heriswap, notez-le. Merci !","Wenn dir Heriswap gefällt, bewerte es bitte. Danke!"
-rate_now,Rate now,Valorar ahora,Noter maintenant,Jetzt bewerten
-rate_later,Later,Más tarde,Plus tard,Später
-rate_never,"No, thanks","No, gracias","Non, merci","Nein, danke"
-change_difficulty,"You seem really good. Would you like to start a new game with increased difficulty?","Pareces muy bueno. ¿Quieres subir la dificultad?","Vous semblez fort. Augmenter la difficulté ?","Du scheinst gut zu sein. Schwierigkeit erhöhen?"
-change_difficulty_yes,Increase difficulty,Subir dificultad,Augmenter,Erhöhen
-change_difficulty_no,"No, keep it easy","No, dejar fácil","Non, rester facile","Nein, leicht lassen"
-average_score,Recent scores avg:,Media reciente:,Moyenne récente:,Durchschnitt:
-help_click_continue,-touch to continue-,-toca para seguir-,-touchez pour continuer-,-tippen zum Fortfahren-
-help_click_play,-touch to play-,-toca para jugar-,-touchez pour jouer-,-tippen zum Spielen-
-help_general_1,"Aligning at least 3 identical leaves. Swap 2 neighbouring leaves to create a combination and earn points.","Alineá al menos 3 hojas iguales. Intercambiá 2 vecinas para combinar y sumar puntos.","Alignez au moins 3 feuilles identiques. Échangez 2 feuilles voisines.","Mindestens 3 gleiche Blätter. Tausche 2 Nachbarn."
-help_general_2,"The hedgehog shows how much time is left. Tap him to get a hint!","El erizo muestra el tiempo. ¡Tocarlo da una pista!","Le hérisson montre le temps. Touchez-le pour un indice !","Der Igel zeigt die Zeit. Tippe für einen Tipp!"
-help_mode1_1,"The goal is to score the most points. Game is time limited.","El objetivo es sumar más puntos. Hay límite de tiempo.","Marquez le plus de points. Temps limité.","Ziel: möglichst viele Punkte. Zeitlimit."
-help_mode1_2,"Bonus leaves score extra. Completing a level adds time by clearing the branch.","Las hojas bonus dan extra. Completar un nivel da tiempo.","Les feuilles bonus rapportent plus. Un niveau donne du temps.","Bonus-Blätter geben extra. Level gibt Zeit."
-help_mode2_1,"Remove all the leaves from the tree as fast as possible by matching 3+.","Sacá todas las hojas del árbol lo más rápido posible.","Retirez toutes les feuilles le plus vite possible.","Entferne alle Blätter so schnell wie möglich."
-help_mode2_2,"The hedgehog shows progress. Bonus leaves score double.","El erizo marca el progreso. Las bonus valen doble.","Le hérisson montre la progression. Bonus x2.","Igel zeigt Fortschritt. Bonus doppelt."
-help_mode3_1,The goal is to score the most points in exactly 100 seconds.,Sumá el máximo en exactamente 100 segundos.,Marquez le plus en 100 secondes.,Möglichst viele Punkte in 100 Sekunden.
-start_at_level_10,"You seem to be good, maybe do you want to start this game at level 10?","Parece que sos bueno, ¿empezamos en nivel 10?","Vous voulez commencer au niveau 10 ?","Bei Level 10 starten?"
-start_at_level_10_yes,Jump to level 10!,¡Saltar al nivel 10!,Aller au niveau 10!,Zu Level 10!
-support_us,Support us,Apoyanos,Soutenez-nous,Unterstützt uns
-about_us,About us,Sobre nosotros,À propos,Über uns
-leaderboard,Leaderboard,Clasificación,Classement,Bestenliste
+keys,en,de,el,es,fr,gl,it,ja,ms,nb,nl,pl,pt_BR,ru,tr
+continue_,Continue,Fortfahren,Συνέχεια,Continuar,Reprendre,Continuar,Riprendi,続ける,Teruskan,Fortsett,Doorgaan,Kontynuuj,Continuar,Продолжить,Devam et
+help,Help,Hilfe,Βοήθεια,Ayuda,Aide,Axuda,Aiuto,ヘルプ,Bantuan,Hjelp,Hulp,Pomoc,Ajuda,Помощь,Yardım
+give_up,Quit,Aufgeben,Έξοδος,Abandonar,Abandonner,Saír,Abbandonare,ゲームを終了,Keluar,Avslutt,Afsluiten,Zakończ,Sair,Выход,Çık
+mode_1,Score race,Punkterennen,Αποτέλεσμα αγώνα,Carrera de puntos,Course au score,Carreira de puntos,Corsa al punteggio,スコアレース,Skor perlumbaan,Poengres,Scorerace,Wyścig o wynik,Corrida de pontos,Гонка на счет,Skor yarışı
+mode_2,Time attack,Gegen die Zeit,επίθεση Χρόνος,Contrarreloj,Contre la montre,Contra o reloxo,Contro il tempo,タイムアタック,Serangan masa,Tidsres,Tijdrace,Atak czasu,Contra o relógio,Время атакует,Zamana karşı
+mode_3,100 seconds,100 Sekunden,100 δευτερόλεπτα,100 segundos,100 secondes,100 segundos,100 secondi,100 seconds,100 saat,100 sekunder,100 seconden,100 sekund,100 segundos,100 секунд,100 saniye
+score,Highscores:,Highscores:,Βαθμολογία:,Mejores puntuaciones:,Meilleurs scores :,Puntuacións máis altas:,Punteggi migliori:,ハイスコア,Skor tertinggi:,Bestenoteringer:,Hoogste scores:,Najlepsze wyniki:,Recordes:,Рекорды:,Yüksek Skorlar:
+play,Start,Spielen,Έναρξη,Jugar,Jouer,Xogar,Gioca,スタート,Mula,Start,Starten,Start,Iniciar,Начать,Başla
+restart,Restart,Wiederspielen,Επανεκκίνηση,Jugar de nuevo,Rejouer,Xogar de novo,Rigioca,再開する,Mula semula,Omstart,Herstarten,Restart,Reiniciar,Повторить,Yeniden Başla
+diff_1,Easy,Anfänger,Εύκολα,Fácil,Débutant,Fácil,Debuttante,Easy,Mudah,Lett,Makkelijk,Łatwy,Fácil,Легко,Kolay
+diff_2,Medium,Fortgeschrittener,Μεσαία,Intermedio,Moyen,Medio,Medio,Medium,Sederhana,Middels,Redelijk moeilijk,Średni,Médio,Средне,Orta
+diff_3,Hard,Profi,Δυσκολα,Difícil,Confirmé,Difícil,Esperto,Hard,Sukar,Vanskelig,Moeilijk,Trudny,Difícil,Сложно,Zor
+leaderboard,"×gg_leaderboards2,1× Leaderboard","×gg_leaderboards2,1× Leaderboard","×gg_leaderboards2,1× Πίνακας κατάταξης","×gg_leaderboards2,1× Paseo de la fama","×gg_leaderboards2,1× Classement","×gg_leaderboards2,1× líder","×gg_leaderboards2,1× Classifica","×gg_leaderboards2,1× リーダーボード","×gg_leaderboards2,1× Papan Peneraju","×gg_leaderboards2,1× Resultatliste","×gg_leaderboards2,1× Klassement","Tabela liderów ×gg_leaderboards2,1×","×gg_leaderboards2,1× Placar","×gg_leaderboards2,1× Список лидеров","×gg_leaderboards2,1× Leaderboard"
+lvl,lvl,lvl,lvl,nvl,niv,nivel,liv,レベル,thp,niv,lvl,lvl,fase,lvl,Seviye
+lvlcap,Lvl,Lvl,Lvl,Nvl,Niv,Nivel,Liv,レベル,Thp,Niv.,Lvl,Lvl,Fase,Lvl,Seviye
+enter_name,Enter your name,Dein Name,Εισάγετε το όνομα σας,Escribe tu nombre,Saisissez votre nom,Insire o teu nome,Digita il tuo nome,名前を入力,Masukkan nama anda,Skriv inn navnet ditt,Vul uw naam in,Wpisz twoje imię,Digite seu nome,Введите ваше имя,İsminizi girin
+save_name,Save,Speichern,Αποθήκευση,Guardar,Enregistrer,Gardar,Registrare,セーブする,Simpan,Lagre,Opslaan,Zapisz,Salvar,Сохранить,Kaydet
+congrats,New high score!,Neuer Highscore!,Νέα υψηλή βαθμολογία!,¡Nuevo récord!,Nouveau meilleur score !,Novo récord!,Nuovo miglior punteggio!,ハイスコアです！,Skor tinggi baharu,Ny toppnotering,Nieuwe hoogste score!,Nowy wysoki wynik!,Novo recorde!,Новый рекорд!,Yeni yüksek skor!
+reuse_name,Or pick one:,oder aus der Liste :,Ή επιλέξτε ένα:,O elige uno:,Ou un de la liste :,Ou elixe un:,O uno della lista:,または名前を選択,Atau ambil satu:,Eller velg én:,Of kies er één uit:,Albo wybierz jeden:,Ou escolha um:,Или выбрать один:,Veya bir tane seçin:
+success,Success,Erfolg,Επιτυχία,Éxito,Succès,Correcto,Successo,成功,Berjaya,Suksess,Succes,Sukces,Sucesso,Удачно,Sonuç
+how_to_play,How to play?,Wie spielt man?,Πώς παίζετε;,¿Cómo se juega?,Comment jouer ?,Como xogar?,Come giocare?,遊び方,Bagaimana hendak main?,Spillehjelp,Hoe speel ik dit?,Jak grać?,Como jogar?,Как играть?,Nasıl oynanır?
+bonus_x2,Bonus x2,Bonus x2,Μπόνους x2,Puntos x2,Bonus x2,Bonus x2,Bonus x2,ボーナス×2,Bonus x2,Bonus x2,Bonus x2,Bonus x2,Bônus x2,Бонус x2,Bonus x2
+objective,Goal,Ziel,Στόχος,Objetivo,Objectif,Obxectivo,obiettivo,ゴール,Matlamat,Mål,Doel,Cel,Objetivo,Цель,Gol
+level,Level,Level,Επίπεδο,Nivel,Niveau,Nivel,livello,レベル,Tahap,Nivå,Level,Poziom,Fase,Уровень,Seviye
+leave_left,leaves left,Verbliebene Blätter,φύλλα,hojas que quedan,feuilles restantes,follas restantes,foglie restanti,残り,daun berbaki,Gjenstående løv,resterende bladeren,pozostałych liści,folhas restantes,листков осталось,ayrılan yapraklar
+quit,Exit,Verlassen,Εξοδος,Dejar,Quitter,Saír,Esci,ゲームを終了,Keluar,Avslutt,Afsluiten,Wyjdź,Sair,Выход,Çıkış
+please_rate_it,"If you enjoy using Heriswap, please take a moment to rate it. Thanks for your support!","Wenn du Heriswap magst, dann bewerte uns bitte. Danke für deine Unterstützung!","Αν σας αρέσει να χρησιμοποιείτε το Heriswap, αφιερώστε λίγο χρόνο για να το αξιολογήσετε. Ευχαριστούμε για την υποστήριξή σας!","Si te gusta Heriswap, dedica un momento a valorarlo. ¡Gracias por tu apoyo!","Si vous aimez Heriswap, pourriez vous prendre quelques secondes pour laisser une évaluation ou un commentaire ? Merci d'avance !","Se o pasas ben xogando con Heriswap, por favor dedícalle un pouco do teu tempo a valoralo. Grazas!","Se ti è piaciuto Heriswap, spenderesti qualche secondo per lasciare una valutazione o un commento? grazie in anticipo.",Heriswapを面白いと思ったら、お手数ですが評価をお願いします。遊んでくれてありがとう。,"Jika anda menyukai Heriswap, sila berikan penarafan padanya. Terima kasih atas  sokongan anda!","Hvis du liker Heriswap, avsett et øyeblikks tid til å avgi din stemme. Takk for din støtte!","Als u Heriswap leuk vindt, neem dan even de tijd om het spel te waarderen. Bedankt voor uw steun!","Jeśli podoba ci się Heriswap, poświęć chwilę, aby nas ocenić. Dzięki za wsparcie!","Se você gostou de jogar Heriswap, por favor envie uma avaliação. Obrigado pelo suporte!","Если вам нравится использовать Heriswap, пожалуйста, оцените его, это займет немного времени. Спасибо за поддержку!","Heriswap'ı kullanmaktan mutluysanız, lütfen kısa bir zaman ayırıp oylama yapın. Desteğiniz için teşekkürler!"
+rate_now,Rate now,Jetzt bewerten,Βαθμολογήστε τώρα,¡Valóralo!,Évaluer !,Valorar agora,valutare,すぐに評価する,Tarafkan sekarang,Stem nå,Nu waarderen,Oceń teraz,Avaliar agora,Оценить,Şimdi oyla
+rate_later,Later,Später,Αργότερα,Más tarde,Plus tard,Máis tarde,Piu tardi,またの機会に,Kemudian,Senere,Later,Później,Depois,Поом,Sonra
+rate_never,"No, thanks","Nein, danke","Όχι, ευχαριστώ",Nunca,"Non, merci","Non, grazas","No, grazie",いいえ、このまま,"Tidak, terima kasih",Nei takk,"Nee, bedankt","Nie, dziękuję","Não, obrigado","Нет, спасибо",Hayır teşekkürler
+change_difficulty,"You seem really good.
+Would you like to start a new game with increased difficulty?","Du scheinst echt gut zu sein. 
+Möchtest du ein neues Spiel mit höherem Schwierigkeitsgrad probieren?","Είστε πραγματικά πολυ καλος παικτης.
+Θέλετε να ξεκινήσετε ένα νέο παιχνίδι με αυξημένη δυσκολία;","Pareces muy bueno, ¿quieres empezar un nuevo juego aumentando la dificultad?",Excellent ! Que diriez-vous d'augmenter un peu la difficulté ?!,"Parece que non se che dá mal.
+Gustaríache comezar un novo xogo cunha maior dificultade?","Sei molto forti, quindi, che ne dici aumentare un po la difficoltà?","とても上手ですね。
+難易度を上げて、新しくゲームを始めてみませんか？","Anda memang hebat.
+Anda mahu mulakan permainan baharu dengan tahap kesukaran ditingkatkan?","Det later til at du er veldig god.
+Vil du starte på nytt med økt vanskelighetsgrad?","U lijkt het erg goed te doen.
+Wilt u een nieuw spel starten met een hogere moeilijkheidsgraad?","Wydajesz się być coraz lepszy.
+Czy chcesz rozpocząć nową grę o zwiększonej trudności?","Você parece ser muito bom!
+Deseja iniciar um novo jogo com dificuldade aumentada?","Кажется, вы действительно хороши.
+Хотите начать новою игру с увеличенным уровнем сложности?","Gerçekten iyi gibisiniz.
+Zorluğu yükseltilmiş yeni bir oyun başlatmak ister misiniz?"
+change_difficulty_yes,Increase difficulty,Erhöhe die Schwierigkeit,Αύξηση δυσκολίας,Aumentar dificultad,"Allons-y, plus dur !",Incrementar a dificultade,"Andiamo, più difficile!",難易度を上げる,Tingkatkan kesukaran,Øk vanskelighetsgrad,Moeilijkheidsgraad verhogen,Zwiększ trudność,Aumentar dificuldade,Увеличить сложность,Zorluğu yükselt
+change_difficulty_no,"No, keep it easy","Nein, danke","Όχι, να το κρατήσετε εύκολο","No, gracias",Non merci.,"Non, está ben como está","No, grazie",いいえ、このまま続ける,"Tidak, kekalkan mudah","Nei, forsett som før","Nee, houd het gemakkelijk","Nie, spokojnie","Não, deixe fácil","Нет, оставим также","Hayır, kolay olsun"
+average_score,Recent scores avg:,Bisheriger Punkte:,Πρόσφατες βαθμολογίες avg:,Promedio de las últimas puntuaciones:,Moyenne préc. :,Puntuacións recentes:,Media dei punteggi recenti:,平均スコア,Pur. skor terkini:,Snitt nylige poengsummer:,Gemiddelde recente scores:,Najnowsze wyniki:,Média de pontos recentes:,Последние оценки avg:,Eski skorların ortalaması:
+help_click_continue,-touch to continue-,-Berühre um fortzufahren-,-αγγίξτε για να συνεχίσετε-,-toca para continuar-,-toucher l'écran pour continuer-,-toca para continuar-,-tocca per continuare-,-タッチして次へ-,-sentuh untuk teruskan-,-trykk for å fortsette-,-aanraken om door te gaan-,"-dotknij, aby kontynuować-",-toque para continuar-,-нажмите для продолжения-,-devam etmek için dokunun-
+help_click_play,-touch to play-,-Berühre zum Spielen-,-Αγγίξτε για αναπαραγωγή-,-toca para jugar-,-toucher l'écran pour jouer-,-toca para xogar-,-tocca per giocare-,-タッチしてプレイ-,-sentuk untuk main-,-berøring starter spillet-,-aanraken om te spelen-,"-dotknij, aby grać-",-toque para jogar-,"-нажмите, чтобы начать-",-oynamak için dokunun-
+help_general_1,"Aligning at least 3 identical leaves ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Swap 2 neighbouring leaves ×feuille2,1× ×feuille3,1× to create a combination and earn points.","Verbinde mindestens 3 identische Blätter ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Tausche 2 benachbarte Blätter ×feuille2,1× ×feuille3,1× um eine Kombination zu kreieren und Punkte zu bekommen.","Ευθυγράμμιση τουλάχιστον 3 ίδια φύλλων × feuille1,1 × × × × feuille1,1 feuille1,1 × .
+
+Εναλλαγή 2 γειτονικά φύλλα × feuille2,1 × × × feuille3,1 να δημιουργήσετε έναν συνδυασμό και κερδίστε πόντους.","Alinea al menos 3 hojas idénticas ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Intercambia 2 hojas vecinas ×feuille2,1× ×feuille3,1× para crear una combinación y ganar puntos.","Les points se gagnent en alignant au moins 3 feuilles ×feuille1,1× ×feuille1,1× ×feuille1,1× identiques.
+
+Ces combinaisons se créent en échangeant 2 feuilles ×feuille2,1× ×feuille3,1× voisines.","Aliña cando menos tres follas idénticas ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Troca de posición dúas follas lindeiras ×feuille2,1× ×feuille3,1× para crear unha combinación e obter puntos.","Allinea almeno 3 foglie identiche ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Scambia 2 foglie vicine ×feuille2,1× ×feuille3,1× per creare una combinazione e guadagnare punti.","3枚以上の同じ葉っぱを一列に並べます。
+×feuille1,1× ×feuille1,1× ×feuille1,1×。
+
+隣接する2枚の葉っぱを入れ替えて、 ×feuille2,1× ×feuille3,1× 
+組み合わせを作り、点数をかせぎます。","Jajar sekurang-kurangnya 3 keping daun yang serupa ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Silih 2 keping daun bersebelahan ×feuille2,1× ×feuille3,1× untuk hasilkan satu gabungan dan dapatkan mata.","Lag en rekke med minst 3 identiske løv ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+Bytt 2 hosliggende løv ×feuille2,1× ×feuille3,1× til en kombinasjon for å samle poeng.","Minimaal 3 identieke bladeren uitlijnen feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Verwissel 2 aan elkaar grenzende bladeren ×feuille2,1× ×feuille3,1× om een combinatie te creëren en punten te verdienen.","Dopasuj co najmniej 3 identyczne liście ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Zamień dwa sąsiednie liście ×feuille2,1× ×feuille3,1× aby stworzyć połączenie i zdobyć punkty.","Alinhe pelo menos 3 folhas iguais ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Troque 2 folhas vizinhas ×feuille2,1× ×feuille3,1× para criar uma combinação e ganhar pontos.","Выстраивайте в линию по крайней мере 3 одинаковый листка ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Сдвиньте 2 соседних листка ×feuille2,1× ×feuille3,1×, чтобы сделать комбинацию и заработать очки.","Aligning at least 3 identical leaves ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Swap 2 neighbouring leaves ×feuille2,1× ×feuille3,1× to create a combination and earn points."
+help_general_2,"The ×herisson_2_5,2× shows how much time is left, and the game is over when it reaches screen's right edge. Tap him to get a hint!","Die ×herisson_2_5,2× zeigt an, wie viel Zeit dir noch bleibt. Das Spiel ist vorbei wenn sie die Rechte Seite des Bildschirms erreicht.","Η × × herisson_2_5,2 δείχνει πώς απομένει πολύς χρόνος, και το παιχνίδι τελειώνει όταν φτάσει δεξιά άκρη της οθόνης. Αγγίξτε αυτόν να πάρει μια υπόδειξη!","El ×herisson_2_5,2× muestra cuánto tiempo queda, y el juego se termina cuando alcanza el borde derecho de la pantalla. ¡Tócalo para que te dé una pista!","Le ×herisson_2_5,2× représente le temps restant et la partie se termine lorsqu'il arrive au bord droit de l'écran. Cliquez sur le hérisson pour afficher une solution !","O ourizo ×herisson_2_5,2× mostra cando tempo queda; o xogo remata cando chega á parte dereita da pantalla. Toca nel para obter unha pista!","Il ×herisson_2_5,2× mostra quanto tempo ti rimane e il gioco finisce quando raggiunge il lato destro dello schermo. Premici sopra per avere dei consigli!","この ×herisson_2_5,2× はどれだけの時間が
+残されているかを示していて、 
+彼が画面の右端に到達したときに
+ゲームが終了します。
+彼にタッチするとヒントがもらえます！","×herisson_2_5,2× menunjukkan berapa banyak masa berbaki, dan permainan tamat bila ia sampai ke sebelah kanan skrin. Ketik padanya  untuk dapatkan pembayang!","×herisson_2_5,2× viser hvor mye tid som gjenstår, spillet er over når den når høyresiden av skjermen. Trykk på ham for å få et hint!","De ×herisson_2_5,2× toont de resterende tijd. Wanneer de rechterkant van het scherm wordt bereikt is het game over. Raak hem aan om een hint te krijgen!","×herisson_2_5,2× pokazuje ile czasu pozostało, a gra kończy się, gdy osiągnie on prawą krawędź ekranu. Dotknij go, aby uzyskać podpowiedź!","×herisson_2_5,2× mostra quanto tempo você tem, e o jogo acaba quando ele chega ao canto direita da tela. Toque nele para pedir uma dica!","×herisson_2_5,2× показывает сколько осталось времени, и игра закончится, когда он достигнет правого края экрана. Нажмите на него, чтобы получить подсказку!","The ×herisson_2_5,2× shows how much time is left, and the game is over when it reaches screen's right edge. Tap him to get a hint!"
+help_mode1_1,"The goal is to score the most points.
+
+Game is time limited.","Dein Ziel ist es die meisten Punkte zu erreichen.
+
+Die Spielzeit ist begrenzt","Ο στόχος είναι να σκοράρετε τους περισσότερους ποντους.
+
+Το παιχνίδι περιορίζεται χρονικά.","La meta es conseguir la puntuación más alta.
+
+El juego tiene un tiempo limitado.","L'objectif est de marquer le plus de points.
+
+Le jeu se joue en un temps limité.","O obxectivo é obter o maior número de puntos.
+
+O tempo é limitado!","L\'obiettivo è realizzare più punti possibile.
+
+E\' un gioco a tempo.","ゲームの目的は多くのスコアを
+獲得することです。
+
+ゲームには時間制限があります。","Matlamatnya adalah mendapatkan skor
+mata yang terbanyak
+
+Masa permainan terhad.","Målet er å sanke flest poeng.
+
+Spilltiden er avgrenset.","Het doel is om de meeste punten te scoren.
+
+Het spel heeft een tijdslimiet.","Celem jest, zdobyć jak najwięcej punktów..
+
+Gra jest ograniczona w czasie.","O objetivo é marcar o máximo de pontos.
+
+O tempo de jogo é limitado.","Цель - набрать как можно больше очков.
+
+Время игры ограничено.",Hedefiniz en fazla puan kazanmaktır.
+help_mode1_2,"The ×feuille5,1× on its back scores bonus points.
+
+For each successful combination extra time is added. The best way to earn lot of time is to complete a level. This is done by clearing the top branch of all its leaves.","The ×feuille5,1× on its back scores bonus points.
+
+For each successful combination extra time is added. The best way to earn lot of time is to complete a level. This is done by clearing the top branch of all its leaves.","Η × × feuille5,1 για μπόνους βαθμολογίες.
+
+Για κάθε επιτυχημένο συνδυασμό προστίθεται επιπλέον χρόνος. Ο καλύτερος τρόπος για να κερδίσετε πολύ χρόνο είναι να ολοκληρώσετε ένα επίπεδο. Αυτό γίνεται με τον καθαρισμό του επάνω κλάδου.","La ×feuille5,1× en su espalda marca los puntos de bonificación.
+
+Para cada combinación exitosa se añade tiempo adicional. La mejor manera de ganar mucho tiempo es completar un nivel. Esto se hace limpiando la rama principal de todas sus hojas.","Le type de ×feuille5,1× sur son dos rapporte plus de points.
+
+Chaque combinaison réussie rapporte un peu de temps. Pour gagner beaucoup de temps, il faut terminer un niveau. Un niveau est terminé lorsque l'arbre est vide.","A folla que carrexa o ourizo ×feuille5,1× supón un bonus de puntos.
+
+Por cada nova combinación conséguese tempo extra. O mellor xeito de obter moito tempo é completar o nivel. Isto faise limpando as pólas da árbore de follas.","Il ×feuille5,1× mostra i punti bonus.
+
+Per ogni combinazione riuscita guadagni del tempo extra. Il modo migliore per guadagnare tempo è completare il livello. Questo si ottiene ripulendo il ramo da tutte le sue foglie.","彼の背中の葉っぱ ×feuille5,1× を消すと
+ボーナスが加算されます。
+
+組み合わせが成功するごとに、
+残り時間が加算されます。
+時間を増やす最も良い方法は
+そのレベルをクリアすることです。
+クリアするには画面上の
+枝についた葉っぱを全て消してください。","×feuille5,1× diatasnya menunjukkan mata bonus.
+
+Bagi setiap gabungan yang berjaya masa tambahan ditambah. Cara terbaik mendapatkan banyak masa adalah dengan menyelesaikan tahap. Ia dilakukan dengan mengosongkan semua daun yang ada dari cabang atas","×feuille5,1× på rygg gir doble bonuspoeng.
+
+For hver kombinasjon som lykkes vil ekstra tid bli lagt til. Den beste måten å tjene tid på er å fullføre et nivå. Dette gjøres ved å renske toppgreina for løv.","De ×feuille5,1× op zijn rug scoort bonuspunten.
+
+Bij elke succesvolle combinatie wordt er extra tijd toegevoegd. De beste manier om veel tijd de verdienen is door level te voltooien. Dit kan worden gedaan door de bovenste tak te ontdoen van al zijn bladeren.","×feuille5,1× zdobywa punktów bonusowych.
+
+Za każdym udanym połączeniem dodawany jest dodatkowy czas. Aby otrzymać dużo czasu, najlepiej jest ukończyć poziom. Robisz to poprzez usunięcie wszystkich liści z górnej gałęzi.","A folha ×feuille5,1× em suas costas marca pontos extras.
+
+Para cada combinação você ganha mais tempo. A melhor forma de ganhar muito tempo é concluir uma fase, limpando completamente as folhas do galho lá de cima.","×feuille5,1× сзади считает дополнительные очки.
+
+Для каждой правильно сложенной комбинации добавляется дополнительное время. Лучший способ заработать много времени - пройти уровень. Чтобы сделать это, вы должны очистить верхушку ветки от всех листьев.","The ×feuille5,1× on its back scores bonus points.
+
+For each successful combination extra time is added. The best way to earn lot of time is to complete a level. This is done by clearing the top branch of all its leaves."
+help_mode2_1,"The goal is to remove all the leaves ×feuille2,1× from the tree as fast as possible.
+
+This is done by aligning at least 3 identical leaves ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Swap 2 neighbouring leaves ×feuille2,1× ×feuille3,1× to create a combination.","The goal is to remove all the leaves ×feuille2,1× from the tree as fast as possible.
+
+This is done by aligning at least 3 identical leaves ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Swap 2 neighbouring leaves ×feuille2,1× ×feuille3,1× to create a combination.","Ο στόχος είναι να αφαιρέσετε όλα τα φύλλα × × feuille2,1 από το δέντρο όσο πιο γρήγορα γινεται.
+
+Αυτό γίνεται με την ευθυγράμμιση τουλάχιστον 3 ίδιων φύλλων × feuille1,1 × × × × feuille1,1 feuille1,1 × .
+
+Εναλλαγή 2 γειτονικών φύλλων × feuille2,1 × × × feuille3,1 να δημιουργήσετε ένα συνδυασμό.","La meta es quitar todas las hojas ×feuille2,1× del árbol lo más rápido posible.
+
+Esto se hace alineando al menos 3 hojas idénticas ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Intercambia 2 hojas vecinas ×feuille2,1× ×feuille3,1× para crear una combinación.","L'objectif est de supprimer toutes les feuilles ×feuille2,1× de l'arbre le plus vite possible.
+
+L'arbre se vide en alignant au moins 3 feuilles ×feuille1,1× ×feuille1,1× ×feuille1,1× identiques.
+
+Ces combinaisons se créent en échangeant 2 feuilles ×feuille2,1× ×feuille3,1× voisines.","O obxectivo é eliminar todas as follas ×feuille2,1× da póla da árbore tan rápido como for posible.
+
+Isto conséguese xuntando cando menos tres follas idénticas ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Troca de posición dúas follas lindeiras ×feuille2,1× ×feuille3,1× para crear unha combinación.","Lo scopo è rimuovere tutte le foglie ×feuille2,1× dall\'albero il più veloce possibile.
+
+Questo si può fare allineando almeno 3 foglie identiche ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Scambia 2 foglie vicine ×feuille2,1× ×feuille3,1× per creare una combinazione.","木から全ての葉っぱ ×feuille2,1× を
+可能な限り速く消していくことが目的です。
+
+葉っぱを消すには3枚以上の
+同じ葉っぱを一列に並べてください。
+ ×feuille1,1× ×feuille1,1× ×feuille1,1×
+
+隣接する2枚の葉っぱ ×feuille2,1× ×feuille3,1× を
+入れ替えて、組み合わせを作ります。","Matlamatnya adalah membuang semua daun ×feuille2,1× dari pokok secepat yang mungkin.
+
+Ia boleh dilakukan dengan menjajarkan sekurang-kurangnya 3 helai daun yang serupa ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Silih 2 helai daun yang bersebelahan ×feuille2,1× ×feuille3,1× untuk hasilkan satu gabungan.","Målet er å fjerne alle bladene ×feuille2,1× fra treet så fort som mulig.
+
+Dette gjøres ved å justere minst 3 identiske blader på linje ×feuille1,1××feuille1,1× ×feuille1,1×.
+
+Bytt 2 hosliggende løv ×feuille2,1× ×feuille3,1× for å oppnå dette.","Het doel is om zo snel mogelijk alle bladeren ×feuille2,1× van de boom te verwijderen.
+
+Dit kan worden gedaan door minimaal 3 identieke bladeren ×feuille1,1× ×feuille1,1× ×feuille1,1× uit te lijnen.
+
+Verwissel 2 aan elkaar grenzende bladeren xfeuille2,1× ×feuille3,1× om een combinatie te creëren.","Celem jest, usunąć wszystkie liście ×feuille2,1× z drzewa w najkrótszym czasie.
+
+Robisz to poprzez dopasowanie co najmniej 3 identycznych liści ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Zamień dwa sąsiednie liście ×feuille2,1× ×feuille3,1× aby stworzyć połączenie.","O objetivo é remover todas as folhas ×feuille2,1× da árvore o mais rápido que você puder.
+
+Faça isto alinhando pelo menos 3 folhas iguais ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Troque 2 folhas vizinhas ×feuille2,1× ×feuille3,1× para criar uma combinação e ganhar pontos.","Цель - удалить как можно быстрее все листья ×feuille2,1× с дерева.
+
+Это можно сделать, выстраивая в линию 3 одинаковых листка ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Сдвиньте 2 соседних листка ×feuille2,1× ×feuille3,1×, чтобы сделать комбинацию.","The goal is to remove all the leaves ×feuille2,1× from the tree as fast as possible.
+
+This is done by aligning at least 3 identical leaves ×feuille1,1× ×feuille1,1× ×feuille1,1×.
+
+Swap 2 neighbouring leaves ×feuille2,1× ×feuille3,1× to create a combination."
+help_mode2_2,"The ×herisson_2_5,2× shows the progress. Game is finished when it reaches screen's right edge.
+
+Every combination using bonus type leaves ×feuille5,1× score double.","The ×herisson_2_5,2× shows the progress. Game is finished when it reaches screen's right edge.
+
+Every combination using bonus type leaves ×feuille5,1× score double.","Η × × herisson_2_5,2 δείχνει την πρόοδο. Το παιχνίδι έχει τελειώσει όταν φτάσει δεξιά στην οθόνη.
+
+Κάθε συνδυασμός χρησιμοποιώντας μπόνους φύλλα × × feuille5,1 σκοράρει διπλά.","El ×herisson_2_5,2× muestra el progreso. El juego se termina cuando alcanza el borde derecho de la pantalla.
+
+Cada combinación que use hojas de tipo bonificación ×feuille5,1× puntúa el doble.","Le ×herisson_2_5,2× représente la progression et la partie se termine lorsqu'il arrive au bord droit de l'écran.
+
+Le type de ×feuille5,1× sur son dos compte double.","O ourizo ×herisson_2_5,2× mostra o progreso. O xogo remata cando alcanza a parte dereita da pantalla.
+
+Cada combinación coincidente coa folla que carrexa ×feuille5,1× supón unha puntuación dobre.","Il ×herisson_2_5,2× mostra i progressi. Il gioco finisce quando raggiunge il bordo destro dello schermo.
+
+Ogni combinazione formata da foglie di tipo bonus ×feuille5,1× raddoppiano il punteggio.","この ×herisson_2_5,2× は進行度を表しています。
+ これが画面の右端に到達すると
+ゲームは終了です。
+
+加点のある葉っぱ ×feuille5,1× を組み合わせると
+点数が2倍になります。","×herisson_2_5,2× menunjukkan perkembangan permainan. Permainan tamat jika dia tiba di sebelah kanan skrin.
+
+Setiap gabungan menggunakan daun jenis bonus ×feuille5,1× mendapat skor dua kali ganda.","×herisson_2_5,2× viser framdrift. Spillet er ferdig når den når høyresiden av skjermen.
+
+Hver kombinasjon som gjør bruk av løv av bonustypen ×feuille5,1× gir doble poeng.","De ×herisson_2_5,2× toont de voortgang. Het spel is afgerond wanneer de rechterkant van het scherm wordt bereikt.
+
+Elke combinatie met bonusbladeren ×feuille5,1× zorgt voor een dubbele score.","×herisson_2_5,2× pokazuje postęp. Gra kończy się, gdy osiągnie prawą krawędź ekranu.
+
+Każde połączenie z liści bonusowych ×feuille5,1× liczy się podwójnie.","×herisson_2_5,2× mostra o seu progreso. O jogo acaba quando ele chega ao canto direito da tela.
+
+Cada combinação usando folhas de bônus ×feuille5,1× duplicam sua pontuação.","×herisson_2_5,2× показывает прогресс. Игра завершается, когда он достигает правого края экрана.
+
+Каждая комбинация, использующая тип бонуса с листьями ×feuille5,1×, удваивает очки.","The ×herisson_2_5,2× shows the progress. Game is finished when it reaches screen's right edge.
+
+Every combination using bonus type leaves ×feuille5,1× score double."
+help_mode3_1,The goal is to score the most points in exactly 100 seconds.,The goal is to score the most points in exactly 100 seconds.,Ο στόχος είναι να συγκεντρώσετε την μεγαλύτερη βαθμολογία σε ακριβώς 100 δευτερόλεπτα.,La meta es obtener la mayor cantidad de puntos en exactamente 100 segundos.,L'objectif est de marquer le plus de points en 100 secondes.,A meta é conseguir o maior número de puntos en 100 segundos exactamente.,L\'obiettivo è realizzare più punti possibile in 100 secondi esatti.,"100秒以内に多くのスコアを
+獲得することが目的です。",Matlamatnya adalah untuk mendapatkan lebih mata dalam tempoh 100 saat.,Målet er å sanke flest mulig poeng i løpet av 100 sekunder,Het doel is om binnen 100 seconden de meeste punten te scoren.,"Celem jest, zdobyć jak najwięcej punktów w dokładnie 100 sekund.",O objetivo é marcar o máximo de pontos em 100 segundos.,Цель - набрать как можно больше очков всего лишь в 100 секунд,Hedefiniz en fazla puan kazanmaktır.
+start_at_level_10,"You seem to be good, maybe do you want to start this game at level 10 ?","Du scheinst gut zu sein, vielleicht möchtest du dieses Spiel bei Level 10 beginnen?","Φαίνεται πς ειστε καλος παικτης, θέλετε να ξεκινήσετε το παιχνίδι στο επίπεδο 10;","Pareces bueno, ¿quizá quieres empezar este juego en el nivel 10?","Vous semblez maîtriser les premiers niveaux! S'ils vous ennuient, vous pouvez passer au niveau 10!","Parece que non se che dá mal, quizais queiras iniciar o xogo no nivel 10?","Sembri bravo, vuoi forse iniziare questo gioco dal livello 10 ?","とてもお上手ですね。
+10レベルから始められますがいかが？","Anda memang bagus, mungkin anda boleh mulakan permainan ini pada tahap 10?","Det later til at du er god, kanskje du vil starte spillet på nivå 10?",U lijkt het erg goed te doen. Wilt u een nieuw spel starten op level 10?,"Wydajesz się być dobry, może chcesz rozpocząć nową grę na poziomie 10?","Você parece ser bom, talvez você queira começar o jogo no nível 10?","Кажется, вы хороший игрок, может быть вы хотели бы начать игру на уровне 10 ?","Bu işte iyisin , belki de oyuna 10. seviyeden başlamak istersin ?"
+start_at_level_10_yes,Jump to level 10!,Springt zu Level 10!,Μετάβαση στο επίπεδο 10!,¡Salta al nivel 10!,"Allons-y, niveau 10 !",Saltar ao nivel 10!,Salta al livello 10!,10レベルから始める,Lompat ke tahap 10!,Hopper til nivå 10!,Breng me naar level 10!,Skocz do poziomu 10!,Pula para o nível 10!,Перейти на 10 уровень!,10. seviyeye atladın !
+support_us,Support us,Unterstütze uns,Υποστηρίξτε μας,Apóyanos,Pour nous aider...,Apoianos,Supportaci,Support us,Sokong kami,Støtt oss,Ondersteun ons,Wesprzyj nas,Ajude-nos,Помочь нам,Bizi destekleyin
+about_us,About us,Über uns,Σχετικά με εμάς,Acerca de nosotros,Pour nous encourager,Acerca de,Chi siamo,About us,Perihal kami,Om oss,Over ons,O nas,Sobre nós,О нас,Hakkımızda
