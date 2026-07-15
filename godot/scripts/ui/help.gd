@@ -2,6 +2,8 @@ extends Control
 
 var _pages: PackedStringArray = []
 var _index: int = 0
+var _next_btn: Button
+var _text: RichTextLabel
 
 
 func _ready() -> void:
@@ -14,29 +16,33 @@ func _ready() -> void:
 		_to_bbcode(tr("help_mode2_2")),
 		_to_bbcode(tr("help_mode3_1")),
 	])
+	_text = $VBox/Text
+	_text.bbcode_enabled = true
+	_next_btn = $VBox.get_node_or_null("Next") as Button
+	if _next_btn == null:
+		_next_btn = Button.new()
+		_next_btn.name = "Next"
+		$VBox.add_child(_next_btn)
+		$VBox.move_child(_next_btn, 1)
+	if not _next_btn.pressed.is_connected(_next):
+		_next_btn.pressed.connect(_next)
+	$VBox/Back.text = "Back"
+	if not $VBox/Back.pressed.is_connected(_back):
+		$VBox/Back.pressed.connect(_back)
 	_show_page()
-	if not $VBox.has_node("Next"):
-		var next := Button.new()
-		next.name = "Next"
-		next.text = tr("help_click_continue")
-		$VBox.add_child(next)
-		$VBox.move_child(next, 1)
-	$VBox/Next.pressed.connect(_next)
-	$VBox/Back.text = tr("give_up") if false else "Back"
-	$VBox/Back.pressed.connect(_back)
 
 
 func _to_bbcode(s: String) -> String:
-	# Convert ×feuille1,1× style into plain emphasis; keep readability.
 	var re := RegEx.new()
 	re.compile("×([^,×]+),[^×]+×")
 	return re.sub(s, "[img]res://assets/textures/feuilles/$1.png[/img]", true)
 
 
 func _show_page() -> void:
-	$VBox/Text.bbcode_enabled = true
-	$VBox/Text.text = _pages[_index]
-	$VBox/Next.text = tr("help_click_play") if _index >= _pages.size() - 1 else tr("help_click_continue")
+	if _text == null or _next_btn == null:
+		return
+	_text.text = _pages[_index]
+	_next_btn.text = tr("help_click_play") if _index >= _pages.size() - 1 else tr("help_click_continue")
 
 
 func _next() -> void:

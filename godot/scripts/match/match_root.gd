@@ -144,6 +144,8 @@ func _load_textures() -> void:
 
 
 func _layout_grid() -> void:
+	if grid == null:
+		return
 	var rect := get_viewport_rect().size
 	if size.x > 1.0:
 		rect = size
@@ -157,6 +159,8 @@ func _layout_grid() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
+		if grid == null:
+			return
 		_layout_grid()
 		_rebuild_sprites()
 	elif what == NOTIFICATION_APPLICATION_PAUSED:
@@ -171,11 +175,14 @@ func _notification(what: int) -> void:
 func _process(dt: float) -> void:
 	if phase == Phase.PAUSED or phase == Phase.GAME_OVER:
 		return
+	if grid == null or mode == null:
+		return
 	if decor:
 		decor.scroll(dt, 0.4 + mode.progress())
 	mode.update(dt, grid)
 	Achievements.tick(dt)
-	hedgehog.set_progress(mode.progress(), get_viewport_rect().size.x)
+	if hedgehog:
+		hedgehog.set_progress(mode.progress(), get_viewport_rect().size.x)
 	if mode is NormalMode:
 		AudioBus.set_stress((mode as NormalMode).stress_amount())
 	_update_hud()
@@ -214,6 +221,8 @@ func _update_hud() -> void:
 
 
 func _rebuild_sprites() -> void:
+	if grid == null or grid_layer == null:
+		return
 	for s in sprites.values():
 		if is_instance_valid(s):
 			s.queue_free()

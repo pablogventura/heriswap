@@ -4,26 +4,39 @@ extends Area2D
 signal tapped
 
 var progress: float = 0.0
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+var sprite: AnimatedSprite2D
 var _collision: CollisionShape2D
 
 
 func _ready() -> void:
-	if sprite == null:
-		sprite = AnimatedSprite2D.new()
-		add_child(sprite)
-	_collision = CollisionShape2D.new()
-	var shape := CircleShape2D.new()
-	shape.radius = 48.0
-	_collision.shape = shape
-	add_child(_collision)
+	_ensure_nodes()
 	input_pickable = true
 
 
+func _ensure_nodes() -> void:
+	if sprite == null:
+		sprite = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite == null:
+		sprite = AnimatedSprite2D.new()
+		sprite.name = "AnimatedSprite2D"
+		add_child(sprite)
+	if _collision == null:
+		_collision = get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if _collision == null:
+		_collision = CollisionShape2D.new()
+		_collision.name = "CollisionShape2D"
+		var shape := CircleShape2D.new()
+		shape.radius = 48.0
+		_collision.shape = shape
+		add_child(_collision)
+
+
 func setup_skins(bonus_type: int = 0) -> void:
+	_ensure_nodes()
 	var frames := SpriteFrames.new()
-	var anim := "default"
-	frames.add_animation(anim)
+	var anim := "run"
+	if not frames.has_animation(anim):
+		frames.add_animation(anim)
 	frames.set_animation_speed(anim, 6.0)
 	frames.set_animation_loop(anim, true)
 	var skin := clampi(bonus_type + 1, 1, 8)
