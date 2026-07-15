@@ -3,24 +3,32 @@ extends Control
 
 func _ready() -> void:
 	UiTheme.apply_backdrop(self)
-	UiTheme.style_buttons_in($VBox)
+	UiTheme.style_button($Save)
+	UiTheme.style_button($Skip)
+	UiTheme.style_label($Result, 36)
+	UiTheme.style_label($Score, 24)
 	var s: Dictionary = GameFlow.last_score
 	var high := SaveService.is_high_score(
 		int(s.get("mode", 0)), int(s.get("difficulty", 0)),
 		int(s.get("points", 0)), float(s.get("time", 0.0))
 	)
-	$VBox/Result.text = tr("congrats") if high else ("%s: %d" % [tr("score"), int(s.get("points", 0))])
-	$VBox/Score.text = "%s: %d\n%s: %d\n%.1fs" % [
+	$Result.text = tr("congrats") if high else ("%s: %d" % [tr("score"), int(s.get("points", 0))])
+	$Score.text = "%s: %d\n%s: %d\n%.1fs" % [
 		tr("score"), int(s.get("points", 0)), tr("level"), int(s.get("level", 1)), float(s.get("time", 0.0))
 	]
-	$VBox/NameRow.visible = high
-	$VBox/NameRow/NameEdit.placeholder_text = tr("enter_name")
-	$VBox/Save.text = tr("save_name")
-	$VBox/Skip.text = tr("continue_")
-	$VBox/Save.pressed.connect(_save)
-	$VBox/Skip.pressed.connect(_done)
+	var digits := AlphabetDigits.new()
+	digits.glyph_height = 48.0
+	$ScoreDigits.add_child(digits)
+	digits.set_display(str(int(s.get("points", 0))))
+	$NameRow.visible = high
+	$NameRow/NameEdit.placeholder_text = tr("enter_name")
+	$Save.text = tr("save_name")
+	$Skip.text = tr("continue_")
+	$Save.pressed.connect(_save)
+	$Skip.pressed.connect(_done)
 	if not high:
-		$VBox/Save.visible = false
+		$Save.visible = false
+		$Reuse.visible = false
 	else:
 		_fill_name_reuse()
 	Achievements.s_beat_top(
@@ -30,27 +38,24 @@ func _ready() -> void:
 
 
 func _fill_name_reuse() -> void:
-	if $VBox.has_node("Reuse"):
-		return
-	var reuse := OptionButton.new()
-	reuse.name = "Reuse"
+	var reuse: OptionButton = $Reuse
+	reuse.clear()
 	reuse.add_item(tr("reuse_name"))
 	var names := {}
 	for e in SaveService.load_scores():
 		names[str(e.name)] = true
 	for n in names.keys():
 		reuse.add_item(n)
-	$VBox.add_child(reuse)
-	$VBox.move_child(reuse, 3)
+	UiTheme.style_button(reuse)
 	reuse.item_selected.connect(func(i):
 		if i > 0:
-			$VBox/NameRow/NameEdit.text = reuse.get_item_text(i)
+			$NameRow/NameEdit.text = reuse.get_item_text(i)
 	)
 
 
 func _save() -> void:
 	var s: Dictionary = GameFlow.last_score.duplicate()
-	s["name"] = $VBox/NameRow/NameEdit.text.strip_edges()
+	s["name"] = $NameRow/NameEdit.text.strip_edges()
 	if s["name"] == "":
 		s["name"] = "Hero"
 	SaveService.add_score(s)
