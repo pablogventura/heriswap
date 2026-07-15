@@ -255,7 +255,10 @@ func _process(dt: float) -> void:
 
 func _update_hud() -> void:
 	hud_label.text = mode.hud_text()
-	progress_bar.value = mode.progress() * 100.0
+	var new_prog := mode.progress() * 100.0
+	if juice and new_prog > progress_bar.value + 0.4:
+		juice.pulse_progress(progress_bar)
+	progress_bar.value = new_prog
 	if hud_digits:
 		hud_digits.set_display(str(mode.points))
 
@@ -406,10 +409,12 @@ func _try_swap(a: Vector2i, b: Vector2i) -> void:
 	if not grid.would_swap_match(a, b):
 		PlatformServices.vibrate(15)
 		AudioBus.play_invalid_swap()
-		if juice and sprites.has(a):
-			juice.wobble(sprites[a])
-		if juice and sprites.has(b):
-			juice.wobble(sprites[b])
+		if juice:
+			if sprites.has(a):
+				juice.wobble(sprites[a])
+			if sprites.has(b):
+				juice.wobble(sprites[b])
+			juice.shockwave(_cell_to_screen(a), Color(0.6, 0.6, 0.65, 0.7), 48.0)
 		return
 	_end_drag_fx()
 	_swap_locked = true
@@ -436,21 +441,41 @@ func _animate_swap(a: Vector2i, b: Vector2i) -> void:
 	var pb := sb.position
 	var base_a: Vector2 = sa.scale
 	var base_b: Vector2 = sb.scale
-	var tw := create_tween().set_parallel(true)
-	tw.tween_property(sa, "position", pb, timings.swap).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tw.tween_property(sb, "position", pa, timings.swap).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var anti_dur := mini(0.09, timings.swap * 0.35)
+	var move_dur := maxf(0.08, timings.swap - anti_dur)
+	var start_swap := func():
+		# Slight arc via midpoints
+		var mid_a := pa.lerp(pb, 0.5) + Vector2(0, -10)
+		var mid_b := pb.lerp(pa, 0.5) + Vector2(0, -10)
+		var tw := create_tween().set_parallel(true)
+		tw.tween_property(sa, "position", mid_a, move_dur * 0.45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tw.tween_property(sb, "position", mid_b, move_dur * 0.45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tw.tween_property(sa, "position", pb, move_dur * 0.55).set_delay(move_dur * 0.45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		tw.tween_property(sb, "position", pa, move_dur * 0.55).set_delay(move_dur * 0.45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		tw.tween_property(sa, "scale", base_a, move_dur * 0.5)
+		tw.tween_property(sb, "scale", base_b, move_dur * 0.5)
+		if juice:
+			juice.punch_scale(sa, base_a, 1.18, move_dur)
+			juice.punch_scale(sb, base_b, 1.18, move_dur)
+			juice.apply_glow(sa, grid.get_cell(a.x, a.y), 0.8)
+			juice.apply_glow(sb, grid.get_cell(b.x, b.y), 0.8)
+		tw.finished.connect(func():
+			grid.swap_cells(a, b)
+			sprites[a] = sb
+			sprites[b] = sa
+			if juice:
+				juice.clear_glow(sa)
+				juice.clear_glow(sb)
+			AudioBus.play_swap()
+			_animating = false
+			combo_chain = 0
+			_begin_delete()
+		)
 	if juice:
-		juice.punch_scale(sa, base_a, 1.14, timings.swap)
-		juice.punch_scale(sb, base_b, 1.14, timings.swap)
-	tw.finished.connect(func():
-		grid.swap_cells(a, b)
-		sprites[a] = sb
-		sprites[b] = sa
-		AudioBus.play_swap()
-		_animating = false
-		combo_chain = 0
-		_begin_delete()
-	)
+		var anti := juice.anticipate_swap(sa, sb, base_a, base_b, anti_dur)
+		anti.finished.connect(start_swap)
+	else:
+		start_swap.call()
 
 
 func _begin_delete() -> void:
@@ -468,30 +493,50 @@ func _begin_delete() -> void:
 	phase = Phase.DELETE
 	_animating = true
 	AudioBus.play_match_combo(combo_chain)
+	var jscale := 1.0
+	var any := false
 	if juice:
+		jscale = juice.juice_scale(combo_chain)
 		juice.combo_banner(combo_chain)
 		if combo_chain >= 2 or pending_combos.size() >= 2:
-			juice.camera_punch(5.0 + combo_chain, 0.14)
-			juice.screen_flash(0.22 + 0.04 * combo_chain, 0.12)
+			juice.camera_punch(6.0 + combo_chain * 1.2, 0.14)
+			juice.zoom_punch(0.03 + 0.01 * combo_chain, 0.16)
+			juice.screen_flash(0.24 + 0.04 * combo_chain, 0.12)
 		for combo in pending_combos:
+			var mid := Vector2.ZERO
+			var n := 0
 			for p in combo.points:
-				juice.burst_at(_cell_to_screen(p), int(combo.type), 14)
-	var tw := create_tween().set_parallel(true)
-	var any := false
+				mid += _cell_to_screen(p)
+				n += 1
+				juice.burst_at(_cell_to_screen(p), int(combo.type), int(16.0 * jscale))
+				if sprites.has(p):
+					juice.apply_pop_flash(sprites[p], int(combo.type), timings.deletion * 0.45)
+			if n > 0:
+				mid /= float(n)
+				juice.shockwave(mid, LeafPalette.color_for(int(combo.type)), 70.0 * jscale)
 	for combo in pending_combos:
+		var center := Vector2.ZERO
+		var count := 0
+		for p in combo.points:
+			center += _cell_to_screen(p)
+			count += 1
+		if count > 0:
+			center /= float(count)
 		for p in combo.points:
 			if not sprites.has(p):
 				continue
 			any = true
 			var spr: Sprite2D = sprites[p]
-			tw.tween_property(spr, "rotation", deg_to_rad(18.0), timings.deletion * 0.2)
-			tw.tween_property(spr, "rotation", deg_to_rad(-18.0), timings.deletion * 0.35).set_delay(timings.deletion * 0.2)
-			tw.tween_property(spr, "scale", spr.scale * 0.05, timings.deletion)
-			tw.tween_property(spr, "modulate:a", 0.0, timings.deletion)
+			if juice:
+				juice.explode_leaf(spr, center, timings.deletion)
+			else:
+				var tw := create_tween()
+				tw.tween_property(spr, "scale", spr.scale * 0.05, timings.deletion)
+				tw.parallel().tween_property(spr, "modulate:a", 0.0, timings.deletion)
 	if not any:
 		_finish_delete()
 		return
-	tw.finished.connect(_finish_delete)
+	get_tree().create_timer(timings.deletion).timeout.connect(_finish_delete)
 
 
 func _finish_delete() -> void:
@@ -522,6 +567,7 @@ func _begin_fall() -> void:
 	_animating = true
 	var tw := create_tween().set_parallel(true)
 	var any := false
+	var land_fx: Array = [] ## {pos, type}
 	for f in pending_falls:
 		var from := Vector2i(int(f.x), int(f.from_y))
 		var to := Vector2i(int(f.x), int(f.to_y))
@@ -529,21 +575,32 @@ func _begin_fall() -> void:
 			continue
 		any = true
 		var spr: Sprite2D = sprites[from]
+		var leaf_t: int = grid.get_cell(from.x, from.y)
 		var land := _cell_to_screen(to)
-		var overshoot := land + Vector2(0, 8.0)
-		tw.tween_property(spr, "position", overshoot, timings.fall * 0.85).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-		tw.tween_property(spr, "position", land, timings.fall * 0.15).set_delay(timings.fall * 0.85).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		var overshoot := land + Vector2(0, 14.0)
+		tw.tween_property(spr, "position", overshoot, timings.fall * 0.82).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		tw.tween_property(spr, "position", land, timings.fall * 0.18).set_delay(timings.fall * 0.82).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		land_fx.append({"pos": land, "type": leaf_t, "cell": to})
 	if not any:
 		_finish_fall_wave()
 		return
-	tw.finished.connect(_finish_fall_wave)
+	tw.finished.connect(func():
+		_finish_fall_wave(land_fx)
+	)
 
 
-func _finish_fall_wave() -> void:
+func _finish_fall_wave(land_fx: Array = []) -> void:
 	grid.apply_falls(pending_falls)
 	_rebuild_sprites()
 	if juice:
 		AudioBus.play_land()
+		for info in land_fx:
+			juice.dust_at(info.pos, int(info.type))
+			var cell: Vector2i = info.cell
+			if sprites.has(cell):
+				var spr: Sprite2D = sprites[cell]
+				var base: float = spr.get_meta("base_scale", cell_size * 0.015)
+				juice.land_squash(spr, Vector2.ONE * base, 0.14)
 	pending_falls = grid.tile_fall()
 	if not pending_falls.is_empty():
 		_begin_fall()
@@ -576,13 +633,17 @@ func _begin_spawn() -> void:
 			continue
 		var spr: Sprite2D = sprites[p]
 		var base: float = spr.get_meta("base_scale", cell_size * 0.015)
-		spr.scale = Vector2.ZERO
+		var land := _cell_to_screen(p)
+		spr.position = land + Vector2(0, -cell_size * 1.15)
+		spr.scale = Vector2.ONE * base * 0.4
 		spr.modulate.a = 0.0
-		tw.tween_property(spr, "scale", Vector2.ONE * base * 1.08, timings.spawn * 0.7).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tw.tween_property(spr, "position", land + Vector2(0, 6), timings.spawn * 0.7).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		tw.tween_property(spr, "position", land, timings.spawn * 0.3).set_delay(timings.spawn * 0.7).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tw.tween_property(spr, "scale", Vector2.ONE * base * 1.12, timings.spawn * 0.7).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		tw.tween_property(spr, "scale", Vector2.ONE * base, timings.spawn * 0.3).set_delay(timings.spawn * 0.7)
-		tw.tween_property(spr, "modulate:a", 1.0, timings.spawn * 0.8)
+		tw.tween_property(spr, "modulate:a", 1.0, timings.spawn * 0.5)
 		if juice:
-			juice.burst_at(_cell_to_screen(p), grid.get_cell(p.x, p.y), 6)
+			juice.burst_at(land, grid.get_cell(p.x, p.y), 8)
 	if juice and pending_spawns.size() > 0:
 		AudioBus.play_spawn_pop()
 	tw.finished.connect(func():
@@ -638,7 +699,9 @@ func _start_level_changed() -> void:
 		juice.stop_trail()
 		juice.screen_flash(0.45, 0.18)
 		juice.camera_punch(10.0, 0.2)
+		juice.zoom_punch(0.06, 0.22)
 		juice.confetti(get_viewport_rect().size * 0.5, 80)
+		juice.shockwave(get_viewport_rect().size * 0.5, Color(1, 1, 1, 0.9), 160.0)
 	level_label.text = "%s %d" % [tr("level"), mode.level]
 	level_label.visible = true
 	level_label.modulate.a = 0.0
@@ -691,9 +754,11 @@ func _on_squall(bonus: int) -> void:
 	AudioBus.play_match()
 	if juice:
 		juice.camera_punch(12.0, 0.22)
+		juice.zoom_punch(0.07, 0.2)
 		juice.screen_flash(0.4, 0.15)
 		juice.confetti(Vector2(200, 400), 48)
 		juice.burst_at(Vector2(100, 500), bonus, 40)
+		juice.shockwave(Vector2(200, 520), LeafPalette.color_for(bonus), 140.0)
 	_spawn_squall_leaves(bonus)
 
 
@@ -733,15 +798,11 @@ func _on_hint() -> void:
 			var spr: Sprite2D = sprites[p]
 			var leaf_t: int = grid.get_cell(p.x, p.y)
 			if juice:
-				juice.apply_glow(spr, leaf_t, 1.2)
+				juice.hint_pulse(spr, leaf_t)
 			var tw := create_tween()
 			tw.tween_property(spr, "rotation", deg_to_rad(18), 0.12)
 			tw.tween_property(spr, "rotation", deg_to_rad(-18), 0.12)
 			tw.tween_property(spr, "rotation", 0.0, 0.12)
-			tw.tween_callback(func():
-				if juice and is_instance_valid(spr):
-					juice.clear_glow(spr)
-			)
 
 
 func _toggle_pause() -> void:
