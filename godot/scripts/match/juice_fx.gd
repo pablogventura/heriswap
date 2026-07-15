@@ -62,6 +62,7 @@ func _setup_flash() -> void:
 func _setup_combo_label() -> void:
 	combo_label = Label.new()
 	combo_label.visible = false
+	combo_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	combo_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	combo_label.z_index = 40
 	UiTheme.style_label(combo_label, 60)
@@ -139,6 +140,7 @@ func float_text(screen_pos: Vector2, text: String, color: Color = Color.WHITE) -
 	var lbl := Label.new()
 	lbl.text = text
 	lbl.z_index = 50
+	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	lbl.label_settings = UiTheme.label_settings(34, color)
 	lbl.position = screen_pos + Vector2(-40, -10)
 	lbl.scale = Vector2(0.7, 0.7)

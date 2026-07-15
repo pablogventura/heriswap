@@ -84,13 +84,13 @@ func _ready() -> void:
 	_setup_hud_digits()
 
 	var snapshot := RunSnapshot.load_run()
+	var needs_intro_spawn := false
 	if not snapshot.is_empty() and int(snapshot.get("mode", -1)) == GameFlow.selected_mode:
 		_restore(snapshot)
 		restore_paused = true
 	else:
 		grid.fill_until_playable()
-		phase = Phase.SPAWN
-		phase_timer = timings.spawn
+		needs_intro_spawn = true
 
 	await get_tree().process_frame
 	_layout_grid()
@@ -119,18 +119,30 @@ func _ready() -> void:
 	$PausePanel/VBox/Restart.pressed.connect(_restart_run)
 	if mode is Go100SecondsMode:
 		(mode as Go100SecondsMode).squall_started.connect(_on_squall)
+	# Overlays first (IGNORE), then playfield on top so leaf drag always receives input.
+	if juice and juice.flash_overlay:
+		juice.flash_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		move_child(juice.flash_overlay, get_child_count() - 1)
+	if juice and juice.combo_label:
+		juice.combo_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		move_child(juice.combo_label, get_child_count() - 1)
+	if level_label:
+		level_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	move_child(playfield, get_child_count() - 1)
 	move_child($HUD, get_child_count() - 1)
 	move_child(pause_panel, get_child_count() - 1)
-	if juice and juice.flash_overlay:
-		move_child(juice.flash_overlay, get_child_count() - 1)
-	if juice and juice.combo_label:
-		move_child(juice.combo_label, get_child_count() - 1)
 	UiTheme.style_label(hud_label, 22)
 	UiTheme.style_label(level_label, 80)
-	if restore_paused:
+	if needs_intro_spawn:
+		# Morph phases are tween/timer driven; do not leave SPAWN waiting on phase_timer.
+		_begin_spawn()
+	elif restore_paused:
 		_toggle_pause()
-
+	elif phase != Phase.USER_INPUT and phase != Phase.PAUSED and phase != Phase.GAME_OVER:
+		# Mid-morph snapshot: return to playable input rather than stuck animating.
+		phase = Phase.USER_INPUT
+		_animating = false
+		_swap_locked = false
 
 func _setup_hud_digits() -> void:
 	hud_digits = AlphabetDigits.new()
@@ -152,6 +164,7 @@ func _wire_playfield() -> void:
 func _setup_fx_nodes() -> void:
 	level_label = Label.new()
 	level_label.visible = false
+	level_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	level_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	level_label.set_anchors_preset(Control.PRESET_CENTER)
 	level_label.offset_left = -260
