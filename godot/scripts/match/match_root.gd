@@ -10,13 +10,22 @@ var phase: int = Phase.USER_INPUT
 var cell_size: float = 64.0
 var grid_origin: Vector2 = Vector2.ZERO
 var leaf_textures: Array = []
-var sprites: Dictionary = {} ## Vector2i -> Sprite2D
+var sprites: Dictionary = {}
+var timings: TimingConfig
+var branch_view: BranchLeavesView
+var hedgehog: HedgehogActor
+var decor: MatchDecor
+var snow_particles: CPUParticles2D
+var level_label: Label
+var desaturate_rect: ColorRect
 
 var drag_start: Vector2i = Vector2i(-1, -1)
-var input_enabled: bool = true
-var phase_timer: float = 0.0
+var hold_timer: float = 0.0
+var combo_chain: int = 0
 var pending_combos: Array = []
+var phase_timer: float = 0.0
 var restore_paused: bool = false
+var elite_pending: bool = false
 
 @onready var grid_layer: Node2D = $GridLayer
 @onready var hud_label: Label = $HUD/ScoreLabel
@@ -29,11 +38,28 @@ var restore_paused: bool = false
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	_load_textures()
+	timings = TimingConfig.for_difficulty(GameFlow.selected_difficulty)
 	grid = GridModel.new()
-	var diff: int = GameFlow.selected_difficulty
-	grid.set_difficulty(diff)
+	grid.set_difficulty(GameFlow.selected_difficulty)
 	mode = GameModeBase.create(GameFlow.selected_mode)
-	mode.enter(diff, GameFlow.start_level)
+	mode.enter(GameFlow.selected_difficulty, GameFlow.start_level)
+
+	decor = MatchDecor.new()
+	add_child(decor)
+	move_child(decor, 0)
+
+	branch_view = BranchLeavesView.new()
+	add_child(branch_view)
+	branch_view.setup(leaf_textures)
+	if mode.has_method("bind_branch"):
+		mode.bind_branch(branch_view)
+
+	hedgehog = HedgehogActor.new()
+	add_child(hedgehog)
+	hedgehog.setup_skins(mode.bonus_type)
+	hedgehog.tapped.connect(_on_hint)
+
+	_setup_fx_nodes()
 
 	var snapshot := RunSnapshot.load_run()
 	if not snapshot.is_empty() and int(snapshot.get("mode", -1)) == GameFlow.selected_mode:
@@ -42,22 +68,73 @@ func _ready() -> void:
 	else:
 		grid.fill_until_playable()
 		phase = Phase.SPAWN
-		phase_timer = 0.15
+		phase_timer = timings.spawn
 
 	await get_tree().process_frame
 	_layout_grid()
 	_rebuild_sprites()
+	hedgehog.set_progress(mode.progress(), get_viewport_rect().size.x)
 	AudioBus.stop_menu_music()
 	AudioBus.start_game_music()
 	SaveService.bump_game_count()
 	pause_panel.visible = false
+	pause_btn.text = "||"
 	pause_btn.pressed.connect(_toggle_pause)
-	hint_btn.pressed.connect(_on_hint)
+	hint_btn.visible = false
+	$PausePanel/VBox/Resume.text = tr("continue_")
+	$PausePanel/VBox/Help.text = tr("help")
+	$PausePanel/VBox/Quit.text = tr("give_up")
+	if not $PausePanel/VBox.has_node("Restart"):
+		var restart := Button.new()
+		restart.name = "Restart"
+		restart.text = tr("restart")
+		$PausePanel/VBox.add_child(restart)
+		$PausePanel/VBox.move_child(restart, 1)
 	$PausePanel/VBox/Resume.pressed.connect(_toggle_pause)
-	$PausePanel/VBox/Help.pressed.connect(func(): GameFlow.go_help())
+	$PausePanel/VBox/Help.pressed.connect(func():
+		GameFlow.returning_from_match = true
+		GameFlow.go_help()
+	)
 	$PausePanel/VBox/Quit.pressed.connect(_abort_to_menu)
+	$PausePanel/VBox/Restart.pressed.connect(_restart_run)
+	if mode is Go100SecondsMode:
+		(mode as Go100SecondsMode).squall_started.connect(_on_squall)
 	if restore_paused:
 		_toggle_pause()
+
+
+func _setup_fx_nodes() -> void:
+	level_label = Label.new()
+	level_label.visible = false
+	level_label.add_theme_font_size_override("font_size", 72)
+	level_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	level_label.set_anchors_preset(Control.PRESET_CENTER)
+	level_label.offset_left = -200
+	level_label.offset_right = 200
+	level_label.offset_top = -40
+	level_label.offset_bottom = 40
+	add_child(level_label)
+
+	desaturate_rect = ColorRect.new()
+	desaturate_rect.visible = false
+	desaturate_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	desaturate_rect.color = Color(0.5, 0.5, 0.5, 0.35)
+	desaturate_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(desaturate_rect)
+
+	snow_particles = CPUParticles2D.new()
+	snow_particles.emitting = false
+	snow_particles.amount = 80
+	snow_particles.lifetime = 2.5
+	snow_particles.direction = Vector2(0, 1)
+	snow_particles.spread = 30.0
+	snow_particles.initial_velocity_min = 40.0
+	snow_particles.initial_velocity_max = 120.0
+	snow_particles.gravity = Vector2(0, 40)
+	snow_particles.position = Vector2(400, -20)
+	snow_particles.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+	snow_particles.emission_rect_extents = Vector2(420, 10)
+	add_child(snow_particles)
 
 
 func _load_textures() -> void:
@@ -72,10 +149,10 @@ func _layout_grid() -> void:
 		rect = size
 	var margin := 40.0
 	var avail_w := rect.x - margin * 2.0
-	var avail_h := rect.y * 0.55
+	var avail_h := rect.y * 0.48
 	cell_size = mini(avail_w / float(grid.grid_size), avail_h / float(grid.grid_size))
 	var total := cell_size * float(grid.grid_size)
-	grid_origin = Vector2((rect.x - total) * 0.5, rect.y * 0.28)
+	grid_origin = Vector2((rect.x - total) * 0.5, rect.y * 0.34)
 
 
 func _notification(what: int) -> void:
@@ -94,11 +171,20 @@ func _notification(what: int) -> void:
 func _process(dt: float) -> void:
 	if phase == Phase.PAUSED or phase == Phase.GAME_OVER:
 		return
+	if decor:
+		decor.scroll(dt, 0.4 + mode.progress())
 	mode.update(dt, grid)
 	Achievements.tick(dt)
+	hedgehog.set_progress(mode.progress(), get_viewport_rect().size.x)
 	if mode is NormalMode:
 		AudioBus.set_stress((mode as NormalMode).stress_amount())
 	_update_hud()
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and phase == Phase.USER_INPUT:
+		hold_timer += dt
+		if hold_timer >= 5.0:
+			Achievements.s_what_to_do()
+	else:
+		hold_timer = 0.0
 	if mode.finished:
 		_on_mode_finished_achievements()
 		_end_game()
@@ -119,11 +205,7 @@ func _process(dt: float) -> void:
 		Phase.LEVEL_CHANGED:
 			phase_timer -= dt
 			if phase_timer <= 0.0:
-				phase = Phase.SPAWN
-				phase_timer = 0.2
-				_rebuild_sprites()
-		Phase.USER_INPUT:
-			pass
+				_end_level_changed()
 
 
 func _update_hud() -> void:
@@ -156,7 +238,6 @@ func _make_sprite(pos: Vector2i, leaf_type: int) -> void:
 
 
 func _cell_to_screen(pos: Vector2i) -> Vector2:
-	# y=0 bottom visually near bottom of grid area → invert for screen
 	var screen_y := float(grid.grid_size - 1 - pos.y)
 	return grid_origin + Vector2((float(pos.x) + 0.5) * cell_size, (screen_y + 0.5) * cell_size)
 
@@ -170,7 +251,7 @@ func _screen_to_cell(screen: Vector2) -> Vector2i:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if phase != Phase.USER_INPUT or not input_enabled:
+	if phase != Phase.USER_INPUT:
 		return
 	if event is InputEventScreenTouch:
 		var st := event as InputEventScreenTouch
@@ -203,6 +284,7 @@ func _try_swap(a: Vector2i, b: Vector2i) -> void:
 	grid.swap_cells(a, b)
 	AudioBus.play_swap()
 	_rebuild_sprites()
+	combo_chain = 0
 	_begin_delete()
 
 
@@ -210,16 +292,23 @@ func _begin_delete() -> void:
 	pending_combos = grid.look_for_combinations()
 	if pending_combos.is_empty():
 		phase = Phase.USER_INPUT
+		combo_chain = 0
 		return
+	combo_chain += 1
+	Achievements.s_bim_bam_boum(combo_chain)
+	if pending_combos.size() >= 2:
+		Achievements.s_double_in_one()
 	phase = Phase.DELETE
-	phase_timer = 0.35
+	phase_timer = timings.deletion
 	AudioBus.play_match()
-	# Pulse matched sprites
 	for combo in pending_combos:
 		for p in combo.points:
 			if sprites.has(p):
+				var spr: Sprite2D = sprites[p]
 				var tw := create_tween()
-				tw.tween_property(sprites[p], "scale", sprites[p].scale * 0.2, 0.3)
+				tw.tween_property(spr, "rotation", deg_to_rad(12.0), timings.deletion * 0.25)
+				tw.tween_property(spr, "rotation", deg_to_rad(-12.0), timings.deletion * 0.25)
+				tw.parallel().tween_property(spr, "scale", spr.scale * 0.15, timings.deletion)
 
 
 func _finish_delete() -> void:
@@ -231,7 +320,7 @@ func _finish_delete() -> void:
 	grid.remove_points(all_points)
 	_rebuild_sprites()
 	phase = Phase.FALL
-	phase_timer = 0.25
+	phase_timer = timings.fall
 
 
 func _finish_fall() -> void:
@@ -244,7 +333,7 @@ func _finish_fall() -> void:
 		_begin_delete()
 		return
 	phase = Phase.SPAWN
-	phase_timer = 0.2
+	phase_timer = timings.spawn
 
 
 func _finish_spawn() -> void:
@@ -253,7 +342,6 @@ func _finish_spawn() -> void:
 		grid.fill_until_playable()
 	else:
 		grid.fill_blanks()
-		# Keep filling until no immediate combos if possible
 		var guard := 0
 		while not grid.look_for_combinations().is_empty() and guard < 20:
 			for combo in grid.look_for_combinations():
@@ -272,15 +360,48 @@ func _finish_spawn() -> void:
 		Achievements.s_level1_for_2k(prev_level, prev_points)
 		Achievements.s_level10(mode.level)
 		AudioBus.play_level_up()
-		phase = Phase.LEVEL_CHANGED
-		phase_timer = 0.8
+		_start_level_changed()
 		return
 	if mode.finished:
 		_on_mode_finished_achievements()
 		_end_game()
 		return
+	combo_chain = 0
 	phase = Phase.USER_INPUT
 	_save_snapshot()
+
+
+func _start_level_changed() -> void:
+	phase = Phase.LEVEL_CHANGED
+	phase_timer = timings.level_changed
+	level_label.text = "%s %d" % [tr("level"), mode.level]
+	level_label.visible = true
+	desaturate_rect.visible = true
+	snow_particles.emitting = true
+	if mode.level == 10 and GameFlow.selected_difficulty != Difficulty.HARD:
+		elite_pending = true
+
+
+func _end_level_changed() -> void:
+	level_label.visible = false
+	desaturate_rect.visible = false
+	snow_particles.emitting = false
+	if elite_pending:
+		elite_pending = false
+		phase = Phase.SPAWN
+		phase_timer = timings.spawn
+		_save_snapshot()
+		GameFlow.go_elite()
+		return
+	hedgehog.setup_skins(mode.bonus_type)
+	phase = Phase.SPAWN
+	phase_timer = timings.spawn
+	_rebuild_sprites()
+
+
+func _on_squall(bonus: int) -> void:
+	hedgehog.setup_skins(bonus)
+	AudioBus.play_match()
 
 
 func _on_hint() -> void:
@@ -291,9 +412,13 @@ func _on_hint() -> void:
 		return
 	for p in hint:
 		if sprites.has(p):
+			var spr: Sprite2D = sprites[p]
 			var tw := create_tween()
-			tw.tween_property(sprites[p], "modulate", Color(2, 2, 1), 0.2)
-			tw.tween_property(sprites[p], "modulate", Color.WHITE, 0.2)
+			tw.tween_property(spr, "rotation", deg_to_rad(18), 0.12)
+			tw.tween_property(spr, "rotation", deg_to_rad(-18), 0.12)
+			tw.tween_property(spr, "rotation", 0.0, 0.12)
+			tw.parallel().tween_property(spr, "modulate", Color(2, 2, 1), 0.2)
+			tw.tween_property(spr, "modulate", Color.WHITE, 0.2)
 
 
 func _toggle_pause() -> void:
@@ -309,7 +434,14 @@ func _toggle_pause() -> void:
 		_save_snapshot()
 
 
+func _restart_run() -> void:
+	RunSnapshot.clear()
+	GameFlow.begin_run(GameFlow.selected_mode, GameFlow.selected_difficulty, GameFlow.start_level)
+
+
 func _abort_to_menu() -> void:
+	if mode is NormalMode and mode.level == 6:
+		Achievements.s_666_loser()
 	RunSnapshot.clear()
 	AudioBus.stop_all_music()
 	GameFlow.returning_from_match = true
@@ -323,6 +455,7 @@ func _notify_achievements(ev: Dictionary) -> void:
 	Achievements.s_rainbow(int(ev.get("type", -1)))
 	Achievements.s_bonus_to_excess(int(ev.get("type", -1)), int(ev.get("bonus", -2)), int(ev.get("nb", 0)))
 	Achievements.s_extermina_score(int(ev.get("points", 0)))
+	Achievements.s_lucky_luke_note_combo()
 
 
 func _on_mode_finished_achievements() -> void:
@@ -330,6 +463,9 @@ func _on_mode_finished_achievements() -> void:
 		Achievements.s_fast_and_finish(mode.time_sec)
 		Achievements.s_reset_grid()
 	Achievements.s_take_your_time()
+	Achievements.s_they_good(SaveService.is_high_score(
+		mode.mode_id(), GameFlow.selected_difficulty, mode.points, mode.time_sec
+	))
 
 
 func _end_game() -> void:
@@ -345,6 +481,7 @@ func _end_game() -> void:
 		"won": mode.won,
 	}
 	Achievements.s_hard_score_total(_total_points_all_time())
+	Achievements.s_test_everything(SaveService.load_scores())
 	GameFlow.go_end_game()
 
 
@@ -370,8 +507,11 @@ func _save_snapshot() -> void:
 
 func _restore(data: Dictionary) -> void:
 	GameFlow.selected_difficulty = int(data.get("difficulty", GameFlow.selected_difficulty))
+	timings = TimingConfig.for_difficulty(GameFlow.selected_difficulty)
 	grid.from_dict(data.get("grid", {}))
 	mode.from_dict(data.get("mode_state", {}))
+	if mode.has_method("bind_branch"):
+		mode.bind_branch(branch_view)
 	Achievements.from_dict(data.get("achievements", {}))
 	phase = int(data.get("phase", Phase.USER_INPUT))
 	if phase == Phase.PAUSED:
