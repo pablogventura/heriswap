@@ -2,6 +2,7 @@ extends Control
 
 ## Match loop: UserInput → Delete → Fall → Spawn (+ LevelChanged / EndGame).
 ## Morphs animate the view first; GridModel commits when tweens finish.
+## Phase.USER_INPUT must stay 0 (see MatchInputRules.PHASE_USER_INPUT).
 
 enum Phase { USER_INPUT, DELETE, FALL, SPAWN, LEVEL_CHANGED, PAUSED, GAME_OVER }
 
@@ -325,7 +326,7 @@ func _event_to_root(local_in_playfield: Vector2) -> Vector2:
 
 
 func _on_playfield_input(event: InputEvent) -> void:
-	if phase != Phase.USER_INPUT or _swap_locked or _animating:
+	if not MatchInputRules.can_accept_play_input(phase, _animating, _swap_locked):
 		return
 	if event is InputEventScreenTouch:
 		var st := event as InputEventScreenTouch

@@ -12,7 +12,8 @@
 | Action | Command |
 |--------|---------|
 | Run | `cd godot && godot --path .` |
-| Tests | `cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15` |
+| Tests (all) | `cd godot && godot --headless --path . -s res://test/test_all.gd --quit-after 30` |
+| Tests (grid) | `cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15` |
 
 ## Match input / morph
 

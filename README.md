@@ -16,12 +16,6 @@ Viewport design canvas: **800×1280**, stretch `canvas_items` + `keep` (window o
 
 Drag adjacent leaves on the playfield (below the HUD) to swap. Invalid swaps vibrate on mobile. Swap / delete / fall / spawn morph the view first, then commit the grid model.
 
-## Tests
-
-```bash
-cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15
-```
-
 ## Features
 
 - Match-3 with difficulty timings, ADSR-like morph tweens, branch leaves, hedgehog hint, decor
@@ -34,6 +28,15 @@ cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15
 - Help pages with `bg_help_*` backgrounds
 - 15 locales + locale picker
 - **Offline platform**: no Google Play Games / IAP plugins; F-Droid-friendly (`PlatformServices`)
+- Headless tests: grid, timing, match input, juice, save top5, achievements
+
+## Tests
+
+```bash
+cd godot && godot --headless --path . -s res://test/test_all.gd --quit-after 30
+# compat grid-only:
+cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15
+```
 
 ## Desktop checklist (visual polish)
 
