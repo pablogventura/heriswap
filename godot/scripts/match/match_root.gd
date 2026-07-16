@@ -330,6 +330,13 @@ func _layout_grid() -> void:
 	cell_size = mini(avail_w / float(grid.grid_size), avail_h / float(grid.grid_size))
 	var total := cell_size * float(grid.grid_size)
 	grid_origin = Vector2((rect.x - total) * 0.5, rect.y * 0.34)
+	_sync_board_decor()
+
+
+func _sync_board_decor() -> void:
+	if decor == null or grid == null:
+		return
+	decor.layout_board(grid_origin, cell_size, grid.playable)
 
 
 func _notification(what: int) -> void:

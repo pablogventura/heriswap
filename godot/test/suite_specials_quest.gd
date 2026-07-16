@@ -49,4 +49,27 @@ static func run() -> int:
 	LevelCatalog.apply_to_grid(g2, def)
 	failed += TestHarness.expect("quest stickers applied", g2.count_stickers() > 0)
 
+	# Irregular playable mask (Candy-style holes)
+	var g3 := GridModel.new()
+	g3.set_size(6, 6)
+	var mask: Array = []
+	for x in 6:
+		var col: Array = []
+		for y in 6:
+			var on := not ((x == 0 or x == 5) and (y == 0 or y == 5)) and not (x >= 2 and x <= 3 and y >= 2 and y <= 3)
+			col.append(on)
+		mask.append(col)
+	g3.set_playable_mask(mask)
+	failed += TestHarness.expect("mask corner off", not g3.is_playable(0, 0))
+	failed += TestHarness.expect("mask hole off", not g3.is_playable(2, 2))
+	failed += TestHarness.expect("mask center playable", g3.is_playable(1, 1))
+	g3.fill_until_playable()
+	failed += TestHarness.expect("mask hole stays empty", g3.get_cell(2, 2) < 0)
+
+	var q8 := LevelCatalog.get_level("q008")
+	failed += TestHarness.expect("q008 has mask", typeof(q8.get("mask", null)) == TYPE_ARRAY)
+	var g4 := GridModel.new()
+	LevelCatalog.apply_to_grid(g4, q8)
+	failed += TestHarness.expect("q008 corner unplayable", not g4.is_playable(0, 0))
+
 	return failed

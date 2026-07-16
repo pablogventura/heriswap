@@ -39,7 +39,7 @@ static func apply_to_grid(grid: GridModel, def: Dictionary, rng: RandomNumberGen
 	var size := int(def.get("size", 8))
 	var types := int(def.get("types", mini(size, 8)))
 	grid.set_size(size, types)
-	var mask = def.get("mask", null)
+	var mask = def.get("mask", def.get("playable_mask", null))
 	if typeof(mask) == TYPE_ARRAY:
 		grid.set_playable_mask(mask)
 	grid.fill_until_playable(rng)

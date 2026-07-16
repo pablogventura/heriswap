@@ -39,9 +39,14 @@ static func validate_pack(path: String = LevelCatalog.PACK_PATH) -> Array:
 			var orders = lv.get("orders", [])
 			if typeof(orders) != TYPE_ARRAY or orders.is_empty():
 				errors.append("%s orders empty" % id)
-		var mask = lv.get("mask", null)
+		var mask = lv.get("mask", lv.get("playable_mask", null))
 		if typeof(mask) == TYPE_ARRAY and mask.size() != size:
 			errors.append("%s mask size mismatch" % id)
+		elif typeof(mask) == TYPE_ARRAY:
+			for x in mask.size():
+				if typeof(mask[x]) != TYPE_ARRAY or mask[x].size() != size:
+					errors.append("%s mask column %d bad" % [id, x])
+					break
 	return errors
 
 
