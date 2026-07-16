@@ -9,6 +9,8 @@ const DEPTH_CLOUD_MID := 0.45
 const DEPTH_DESK := 0.55
 const DEPTH_FRAME := 0.25
 const DEPTH_NEAR := 0.9
+const VIEW_W := 800.0
+const CLOUD_EDGE_FADE := 90.0
 
 const KRAFT := Color(0.82, 0.68, 0.48, 1.0)
 const CARDBOARD := Color(0.55, 0.38, 0.22, 1.0)
@@ -330,12 +332,31 @@ func scroll(delta: float, speed: float) -> void:
 		if idx < 0 or idx >= _cloud_base_x.size():
 			continue
 		var drift: float = float(_cloud_speeds[idx]) * cloud_mul
-		_cloud_base_x[idx] = fposmod(float(_cloud_base_x[idx]) + delta * drift + 50.0, 920.0) - 50.0
+		_cloud_base_x[idx] = float(_cloud_base_x[idx]) + delta * drift
+		var half_w := 120.0
+		if c.texture:
+			half_w = c.texture.get_size().x * absf(c.scale.x) * 0.55
+		var left_limit := -half_w - 40.0
+		var right_limit := VIEW_W + half_w + 40.0
+		# Recycle only when fully off-screen so wrap is invisible.
+		if _cloud_base_x[idx] > right_limit:
+			_cloud_base_x[idx] = left_limit
+			_cloud_base_y[idx] = clampf(
+				float(_cloud_base_y[idx]) + randf_range(-18.0, 18.0),
+				40.0,
+				220.0
+			)
 		var depth: float = float(_cloud_depths[idx])
-		c.position = Vector2(
-			float(_cloud_base_x[idx]) + _punch_offset.x * depth,
-			float(_cloud_base_y[idx]) + _punch_offset.y * depth
-		)
+		var x := float(_cloud_base_x[idx]) + _punch_offset.x * depth
+		var y := float(_cloud_base_y[idx]) + _punch_offset.y * depth
+		c.position = Vector2(x, y)
+		# Soft fade at viewport edges (covers blur halo / oversized sprites).
+		var edge_a := 1.0
+		if x < CLOUD_EDGE_FADE:
+			edge_a = clampf(x / CLOUD_EDGE_FADE, 0.0, 1.0)
+		elif x > VIEW_W - CLOUD_EDGE_FADE:
+			edge_a = clampf((VIEW_W - x) / CLOUD_EDGE_FADE, 0.0, 1.0)
+		c.modulate.a = edge_a
 
 
 func parallax_punch(strength: float = 8.0, duration: float = 0.22) -> void:
