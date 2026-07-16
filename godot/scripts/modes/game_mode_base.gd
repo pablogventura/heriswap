@@ -32,7 +32,7 @@ func enter(difficulty: int, start_level: int = 1) -> void:
 	finished = false
 	won = false
 	level = start_level
-	bonus_type = rng.randi_range(0, Difficulty.to_grid_size(difficulty) - 1)
+	bonus_type = rng.randi_range(0, Difficulty.to_type_count(difficulty) - 1)
 
 
 func update(dt: float, _grid: GridModel) -> void:

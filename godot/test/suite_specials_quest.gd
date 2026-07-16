@@ -12,9 +12,9 @@ static func run() -> int:
 	failed += TestHarness.expect("fish", MatchSpecials.classify_combo(sq) == MatchPiece.Special.FISH)
 
 	var g := GridModel.new()
-	g.set_size(6, 5)
+	g.set_size(6, 6)
 	failed += TestHarness.expect("size 6", g.grid_size == 6)
-	failed += TestHarness.expect("types 5", g.type_count == 5)
+	failed += TestHarness.expect("types 6", g.type_count == 6)
 	g.fill_until_playable()
 	failed += TestHarness.expect("playable moves", g.still_combinations())
 

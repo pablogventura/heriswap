@@ -78,7 +78,7 @@ static func apply_to_grid(grid: GridModel, def: Dictionary, rng: RandomNumberGen
 
 static func _builtin_fallback() -> Array:
 	return [
-		{"id": "q001", "name": "First Stickers", "objective": "clear_stickers", "moves": 25, "size": 6, "types": 5, "tutorial": true},
+		{"id": "q001", "name": "First Stickers", "objective": "clear_stickers", "moves": 25, "size": 6, "types": 6, "tutorial": true},
 		{"id": "q002", "name": "Score Craft", "objective": "reach_score", "moves": 20, "size": 7, "types": 6, "target_score": 4000},
 		{"id": "q003", "name": "Tape Intro", "objective": "clear_stickers", "moves": 22, "size": 7, "types": 6,
 			"blockers": [{"x": 2, "y": 2, "kind": 1, "layers": 1}, {"x": 4, "y": 2, "kind": 1, "layers": 2}]},

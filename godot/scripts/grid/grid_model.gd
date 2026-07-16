@@ -20,7 +20,7 @@ signal cells_changed
 
 func set_difficulty(diff: int) -> void:
 	grid_size = Difficulty.to_grid_size(diff)
-	type_count = grid_size
+	type_count = Difficulty.to_type_count(diff)
 	clear()
 
 

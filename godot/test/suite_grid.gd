@@ -6,10 +6,14 @@ static func run() -> int:
 	failed += TestHarness.expect("easy size", Difficulty.to_grid_size(Difficulty.EASY) == 5)
 	failed += TestHarness.expect("medium size", Difficulty.to_grid_size(Difficulty.MEDIUM) == 6)
 	failed += TestHarness.expect("hard size", Difficulty.to_grid_size(Difficulty.HARD) == 8)
+	failed += TestHarness.expect("easy types cc", Difficulty.to_type_count(Difficulty.EASY) == 6)
+	failed += TestHarness.expect("medium types", Difficulty.to_type_count(Difficulty.MEDIUM) == 6)
+	failed += TestHarness.expect("hard types", Difficulty.to_type_count(Difficulty.HARD) == 8)
 	failed += TestHarness.expect("diff next wraps", Difficulty.next(Difficulty.HARD) == Difficulty.EASY)
 
 	var g := GridModel.new()
 	g.set_difficulty(Difficulty.EASY)
+	failed += TestHarness.expect("easy grid types", g.type_count == 6)
 	failed += TestHarness.expect("clear empty", g.get_cell(0, 0) == -1)
 
 	g.clear()

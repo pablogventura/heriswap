@@ -18,7 +18,7 @@ func enter(difficulty: int, start_level: int = 1) -> void:
 			limit = 30.0
 		_:
 			limit = 100.0
-	bonus_type = rng.randi_range(0, Difficulty.to_grid_size(difficulty) - 1)
+	bonus_type = rng.randi_range(0, Difficulty.to_type_count(difficulty) - 1)
 
 
 func bind_branch(view: BranchLeavesView) -> void:

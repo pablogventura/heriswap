@@ -15,6 +15,16 @@ static func to_grid_size(diff: int) -> int:
 		_:
 			return 8
 
+
+## Color count in play. Easy matches classic Candy Crush (6).
+static func to_type_count(diff: int) -> int:
+	match diff:
+		EASY, MEDIUM:
+			return 6
+		_:
+			return 8
+
+
 static func from_grid_size(size: int) -> int:
 	match size:
 		5:

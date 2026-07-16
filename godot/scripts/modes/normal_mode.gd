@@ -14,7 +14,7 @@ func mode_id() -> int:
 
 func enter(difficulty: int, start_level: int = 1) -> void:
 	super.enter(difficulty, start_level)
-	_start_level(start_level, Difficulty.to_grid_size(difficulty))
+	_start_level(start_level, Difficulty.to_type_count(difficulty))
 
 
 func bind_branch(view: BranchLeavesView) -> void:
