@@ -12,6 +12,10 @@ var options: Dictionary = {
 	"rate_never": false,
 	"rate_later_count": 0,
 	"locale": "en",
+	"quest_index": 0,
+	"daily_claimed": "",
+	"reduce_motion": false,
+	"seed": 0,
 }
 
 
@@ -115,6 +119,55 @@ func load_achievements_state() -> Dictionary:
 func save_achievements_state(state: Dictionary) -> void:
 	state["version"] = SCHEMA_VERSION
 	_write_json(ACHIEVEMENTS_PATH, state)
+
+
+const PROGRESS_PATH := "user://scrap_progress.json"
+const SLOT_PATH := "user://save_slot_%d.json"
+
+
+func save_scrap_progress(boosters: Dictionary, codex: Dictionary) -> void:
+	_write_json(PROGRESS_PATH, {
+		"version": SCHEMA_VERSION,
+		"boosters": boosters,
+		"codex": codex,
+	})
+
+
+func load_scrap_progress() -> Dictionary:
+	return _read_json(PROGRESS_PATH)
+
+
+func export_save_blob() -> String:
+	return JSON.stringify({
+		"options": options,
+		"scores": load_scores(),
+		"achievements": load_achievements_state(),
+		"progress": load_scrap_progress(),
+	}, "\t")
+
+
+func import_save_blob(text: String) -> bool:
+	var parsed = JSON.parse_string(text)
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return false
+	if parsed.has("options") and typeof(parsed.options) == TYPE_DICTIONARY:
+		options.merge(parsed.options, true)
+		save_options()
+	if parsed.has("scores"):
+		_write_json(SCORES_PATH, {"version": SCHEMA_VERSION, "entries": parsed.scores})
+	if parsed.has("achievements") and typeof(parsed.achievements) == TYPE_DICTIONARY:
+		save_achievements_state(parsed.achievements)
+	if parsed.has("progress") and typeof(parsed.progress) == TYPE_DICTIONARY:
+		_write_json(PROGRESS_PATH, parsed.progress)
+	return true
+
+
+func write_slot(slot: int, blob: Dictionary) -> void:
+	_write_json(SLOT_PATH % clampi(slot, 0, 2), blob)
+
+
+func read_slot(slot: int) -> Dictionary:
+	return _read_json(SLOT_PATH % clampi(slot, 0, 2))
 
 
 func _read_json(path: String) -> Dictionary:

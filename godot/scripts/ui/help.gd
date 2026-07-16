@@ -10,11 +10,11 @@ func _ready() -> void:
 	UiTheme.style_button($Back)
 	_pages = [
 		{"text": _plain(tr("help_general_1")), "icons": ["feuille1", "feuille2", "feuille3"], "bg": "bg_help_howto"},
-		{"text": _plain(tr("help_general_2")), "icons": ["herisson_2_5"], "bg": "bg_help_howto"},
+		{"text": _plain(tr("help_progress")), "icons": ["feuille5"], "bg": "bg_help_howto"},
 		{"text": _plain(tr("help_mode1_1")), "icons": ["feuille5"], "bg": "bg_help_obj_score"},
 		{"text": _plain(tr("help_mode1_2")), "icons": ["feuille5"], "bg": "bg_help_obj_score"},
 		{"text": _plain(tr("help_mode2_1")), "icons": ["feuille1", "feuille2"], "bg": "bg_help_obj_time"},
-		{"text": _plain(tr("help_mode2_2")), "icons": ["feuille5"], "bg": "bg_help_obj_time"},
+		{"text": _plain(tr("help_mode2_progress")), "icons": ["feuille5"], "bg": "bg_help_obj_time"},
 		{"text": _plain(tr("help_mode3_1")), "icons": ["feuille1"], "bg": "bg_help_howto"},
 	]
 	$Text.add_theme_font_override("normal_font", UiTheme.font())

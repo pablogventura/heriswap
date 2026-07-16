@@ -7,12 +7,15 @@ const MODE_BG := "res://assets/textures/menu/fond_menu_mode.png"
 const SAC := "res://assets/textures/menu/sac.png"
 const PLAN1 := "res://assets/textures/menu/1erplan.png"
 const PLAN2 := "res://assets/textures/menu/2emeplan.png"
-const FONT := "res://assets/fonts/FreeMono.ttf"
+const FONT := "res://assets/fonts/Fredoka-Regular.ttf"
+const FONT_FALLBACK := "res://assets/fonts/FreeMono.ttf"
 
 
 static func font() -> Font:
 	if ResourceLoader.exists(FONT):
 		return load(FONT) as Font
+	if ResourceLoader.exists(FONT_FALLBACK):
+		return load(FONT_FALLBACK) as Font
 	return ThemeDB.fallback_font
 
 
@@ -21,8 +24,8 @@ static func label_settings(size: int = 28, color: Color = Color.WHITE) -> LabelS
 	ls.font = font()
 	ls.font_size = size
 	ls.font_color = color
-	ls.outline_size = 2
-	ls.outline_color = Color(0, 0, 0, 0.55)
+	ls.outline_size = 3
+	ls.outline_color = Color(0.15, 0.1, 0.08, 0.45)
 	return ls
 
 

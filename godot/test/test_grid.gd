@@ -10,6 +10,7 @@ func _init() -> void:
 func _run() -> void:
 	var failed: int = load("res://test/suite_grid.gd").run()
 	failed += load("res://test/suite_timing.gd").run()
+	failed += load("res://test/suite_specials_quest.gd").run()
 	if failed == 0:
 		print("TEST_GRID_OK")
 		quit(0)

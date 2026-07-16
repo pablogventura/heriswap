@@ -8,8 +8,25 @@ var _loaded: bool = false
 
 func _ready() -> void:
 	_ensure_translations()
-	var loc := str(SaveService.options.get("locale", "en"))
+	var saved := str(SaveService.options.get("locale", ""))
+	var loc := saved
+	if loc == "":
+		loc = _system_locale_or_en()
+		SaveService.options["locale"] = loc
+		SaveService.save_options()
 	TranslationServer.set_locale(loc)
+
+
+func _system_locale_or_en() -> String:
+	var supported := ["en", "es", "pt_BR", "fr", "de"]
+	var sys := OS.get_locale() # e.g. es_AR
+	if sys.begins_with("pt"):
+		sys = "pt_BR"
+	else:
+		sys = sys.split("_")[0]
+	if sys in supported:
+		return sys
+	return "en"
 
 
 func _ensure_translations() -> void:

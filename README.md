@@ -1,6 +1,6 @@
-# Heriswap (Godot rewrite)
+# ScrapSwap
 
-Match-3 leaf game rewritten in **Godot 4.4** (GDScript).
+Paper craft match-3 (ScrapSwap) rewritten in **Godot 4.4** (GDScript).
 
 Legacy C++ / sac code remains as **reference**. Product lives in [`godot/`](godot/).
 
@@ -18,24 +18,22 @@ Drag adjacent leaves on the playfield (below the HUD) to swap. Invalid swaps vib
 
 ## Features
 
-- Match-3 with difficulty timings, ADSR-like morph tweens, branch leaves, hedgehog hint, decor
-- **Match juice** (`JuiceFx`): layered bursts, shockwaves, explode arcs, anticipation swap, land squash, drop-in spawn, combo banners, float `+score`, camera/zoom punch, screen flash / leaf glow / leaf_pop shaders, drag trail
-- Level-up FX (snow + desaturate + confetti + shockwave), denser Go100 squall with punch
-- Multi-track jukebox + stress ramp + hot combo pitch (cap 1.55) + rare high-chain stinger
-- Menus on fixed 800×1280 Control layout with original art (`fond_bouton`, layered plans, SAC)
-- FreeMono theme + selective alphabet bitmap digits on HUD / scores (pulse on change)
-- Scores JSON, mid-game resume, 20 local achievements (SuccessManager thresholds)
-- Help pages with `bg_help_*` backgrounds
-- 15 locales + locale picker
-- **Offline platform**: no Google Play Games / IAP plugins; F-Droid-friendly (`PlatformServices`)
-- Headless tests: grid, timing, match input, juice, save top5, achievements
+- **Quest** corkboard (default): stickers / score / ingredients / orders, craft tray boosters, sugar-crush, Daily Desk, Scrap Codex
+- **Arcade** + Zen: classic Normal / Tiles / 100s plus endless desk
+- Paper specials (rayado, paquete, confetti, avioncito) and blockers (tape, scrap, glue, …)
+- Match-3 morphs: branch leaves, decor, hint button
+- **Match juice** (`JuiceFx`): bursts, shockwaves, combo banners, float score, camera punch, shaders, drag trail
+- Free play: no ads, no purchases; GPL-3.0
+- Locales in game: en, es, pt_BR, fr, de (system default when matched)
+- Scores JSON, mid-game resume, local achievements, save export
+- Offline platform (`PlatformServices`); headless tests + level validator
 
 ## Tests
 
 ```bash
 cd godot && godot --headless --path . -s res://test/test_all.gd --quit-after 30
-# compat grid-only:
 cd godot && godot --headless --path . -s res://test/test_grid.gd --quit-after 15
+cd godot && godot --headless --path . -s res://test/validate_levels.gd --quit-after 15
 ```
 
 ## Desktop checklist (visual polish)

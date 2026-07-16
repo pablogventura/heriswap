@@ -4,6 +4,8 @@ extends RefCounted
 const MODE_NORMAL := 0
 const MODE_TILES_ATTACK := 1
 const MODE_GO100 := 2
+const MODE_QUEST := 3
+const MODE_ZEN := 4
 
 var points: int = 0
 var time_sec: float = 0.0
@@ -86,5 +88,11 @@ static func create(mode: int) -> GameModeBase:
 			return TilesAttackMode.new()
 		MODE_GO100:
 			return Go100SecondsMode.new()
+		MODE_QUEST, MODE_ZEN:
+			var q: QuestMode = load("res://scripts/modes/quest_mode.gd").new() as QuestMode
+			if mode == MODE_ZEN:
+				q.zen = true
+				q.objective = "zen"
+			return q
 		_:
 			return NormalMode.new()

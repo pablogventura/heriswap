@@ -1,12 +1,12 @@
 ; Engine configuration file.
-; Godot 4.4 Heriswap rewrite
+; Godot 4.4 ScrapSwap
 
 config_version=5
 
 [application]
 
-config/name="Heriswap"
-config/description="Match-3 leaf game - Godot rewrite"
+config/name="ScrapSwap"
+config/description="Paper craft match-3 - ScrapSwap"
 config/version="2.0.0"
 run/main_scene="res://scenes/menus/Logo.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")

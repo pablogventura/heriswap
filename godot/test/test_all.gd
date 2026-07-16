@@ -21,6 +21,8 @@ func _run() -> void:
 	failed += load("res://test/suite_save.gd").run() as int
 	print("--- SuiteAchievements ---")
 	failed += load("res://test/suite_achievements.gd").run() as int
+	print("--- SuiteSpecialsQuest ---")
+	failed += load("res://test/suite_specials_quest.gd").run() as int
 
 	if failed == 0:
 		print("TEST_ALL_OK")

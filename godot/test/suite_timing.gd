@@ -13,4 +13,7 @@ static func run() -> int:
 	failed += TestHarness.expect("medium between delete", medium.deletion < easy.deletion and medium.deletion > hard.deletion)
 	failed += TestHarness.expect("easy level_changed longer", easy.level_changed >= medium.level_changed)
 	failed += TestHarness.expect("swap positive", easy.swap > 0.0 and hard.swap > 0.0)
+	failed += TestHarness.expect("telegraph positive", easy.telegraph > 0.0 and hard.telegraph > 0.0)
+	failed += TestHarness.expect("hard faster telegraph", hard.telegraph <= medium.telegraph and medium.telegraph <= easy.telegraph)
+	failed += TestHarness.expect("clear_total ordered", hard.clear_total() < easy.clear_total())
 	return failed

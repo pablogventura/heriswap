@@ -9,14 +9,14 @@ func _ready() -> void:
 	var logo := "res://assets/textures/logo/soupe_logo.png"
 	if ResourceLoader.exists(logo):
 		$Brand.texture = load(logo)
-	$Title.text = "Heriswap"
+	$Title.text = "ScrapSwap"
 	$Panel/Play.text = tr("play")
 	$Panel/About.text = tr("about_us")
 	$Panel/Quit.text = tr("quit")
 	$Panel/Continue.text = tr("continue_")
 	$Panel/Play.pressed.connect(func():
 		AudioBus.play_click()
-		GameFlow.go_mode_menu()
+		GameFlow.go_quest_map()
 	)
 	$Panel/About.pressed.connect(func():
 		AudioBus.play_click()
@@ -41,7 +41,7 @@ func _ready() -> void:
 func _ensure_locale() -> void:
 	var loc: OptionButton = $Panel/Locale
 	if loc.item_count == 0:
-		for code in ["en", "es", "fr", "de", "it", "pt_BR", "ru", "ja", "nl", "pl", "tr", "el", "gl", "ms", "nb"]:
+		for code in ["en", "es", "pt_BR", "fr", "de"]:
 			loc.add_item(code)
 	UiTheme.style_button(loc)
 	var current := str(SaveService.options.get("locale", "en"))
