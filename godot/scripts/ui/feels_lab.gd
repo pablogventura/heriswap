@@ -20,6 +20,7 @@ func _ready() -> void:
 	add_child(layer)
 	_juice.setup(layer)
 	_juice.parallax_host = _decor
+	_fx_board_full()
 	_demo = Sprite2D.new()
 	_demo.centered = true
 	_demo.position = _center
@@ -47,6 +48,8 @@ func _ready() -> void:
 		["Flip", _fx_flip],
 		["Land shadow", _fx_land_shadow],
 		["Parallax", _fx_parallax],
+		["Board full", _fx_board_full],
+		["Board irregular", _fx_board_irregular],
 		["Match threads", _fx_match],
 		["Tape sweep H", _fx_tape_h],
 		["Tape sweep V", _fx_tape_v],
@@ -133,6 +136,28 @@ func _fx_land_shadow() -> void:
 
 func _fx_parallax() -> void:
 	_juice.camera_punch(14.0, 0.2, 4)
+
+
+func _fx_board_full() -> void:
+	var mask: Array = []
+	for x in 6:
+		var col: Array = []
+		for y in 6:
+			col.append(true)
+		mask.append(col)
+	_decor.layout_board(Vector2(180, 360), 64.0, mask)
+
+
+func _fx_board_irregular() -> void:
+	var mask: Array = []
+	for x in 6:
+		var col: Array = []
+		for y in 6:
+			var on := not ((x == 0 or x == 5) and (y == 0 or y == 5))
+			on = on and not (x >= 2 and x <= 3 and y >= 2 and y <= 3)
+			col.append(on)
+		mask.append(col)
+	_decor.layout_board(Vector2(180, 360), 64.0, mask)
 
 
 func _fx_match() -> void:

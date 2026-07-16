@@ -25,12 +25,16 @@ Morph phases animate sprites first (`_animating` / `_swap_locked`), then commit 
 
 ## Match juice
 
-`JuiceFx` owns paper-craft match feedback: layered `CPUParticles2D` bursts (scraps/confetti), shockwave rings, explode arcs (occasional fake flip), float text, combo banners, grid shake/zoom punch, `leaf_glow` / `leaf_pop` / `screen_flash` shaders, drag trail. Paper morph: `fall_flutter` on falls, `paper_spin_flutter` + occasional `paper_flip` on spawn (always on new specials), `land_shadow_flash` with land squash. `MatchDecor` ambient layer drift + `parallax_punch` from `camera_punch` (scaled by `juice_scale(combo_chain)`). Clear is two-phase: **telegraph** (yarn threads / tape sweep / foil rays / wrap ring / plane trails) then destroy morph - every delete wave including cascades. Wired from `match_root.gd` on swap/delete/fall/spawn/level-up/squall. Specials use `special_created`. Do not leave glow materials on sprites during level-up desaturate (`juice.level_locked`). `reduce_motion` skips telegraph, flutter, flip, land shadow flash, and decor parallax punch. Art direction: chaotic primary-school paper collages (see `tools/paper_gen/`).
+`JuiceFx` owns paper-craft match feedback: layered `CPUParticles2D` bursts (scraps/confetti), shockwave rings, explode arcs (occasional fake flip), float text, combo banners, grid shake/zoom punch, `leaf_glow` / `leaf_pop` / `screen_flash` shaders, drag trail. Paper morph: `fall_flutter` on falls, `paper_spin_flutter` + occasional `paper_flip` on spawn (always on new specials), `land_shadow_flash` with land squash. Clear is two-phase: **telegraph** then destroy morph. Wired from `match_root.gd`. `reduce_motion` skips telegraph, flutter, flip, land shadow flash, decor parallax punch, and far-layer blur. Art direction: chaotic primary-school paper collages (see `tools/paper_gen/`).
+
+## Match backdrop
+
+`MatchDecor` builds a classroom scene: far sky/clouds with `soft_blur` (stronger when farther), mid desk band, Candy-style kraft **board mat** (per-playable-cell tiles + cardboard border + masking tape) under `GridLayer`, near scraps only outside the mat. `layout_board(origin, cell_size, playable)` follows `GridModel.playable` holes/sectors. Cloud drift ~22-40 px/s; `parallax_punch` from juice. Quest JSON may set `"mask"` / `"playable_mask"` (columns `[x][y]`, y=0 bottom).
 
 ## ScrapSwap modes
 
-- **Quest** (default corkboard map): `LevelCatalog` JSON, stickers / score / ingredients / orders, craft tray, sugar-crush, Daily Desk, Scrap Codex.
-- **Arcade**: Normal / Tiles / 100s + Zen.
+- **Quest** (default corkboard map): `LevelCatalog` JSON, stickers / score / ingredients / orders, craft tray, sugar-crush, Daily Desk, Scrap Codex. Optional irregular `mask` (see `q008`).
+- **Arcade**: Normal / Tiles / 100s + Zen. Easy uses **6** piece types (Candy Crush count) on a 5×5 board.
 - Specials: rayado / paquete / confetti / avioncito (`MatchSpecials`); blockers on `GridModel`.
 
 ## UI
